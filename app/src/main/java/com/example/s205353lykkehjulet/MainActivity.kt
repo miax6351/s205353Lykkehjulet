@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setContentView(R.layout.fragment_word_letter)
         setContentView(R.layout.fragment_heart)
     }
 

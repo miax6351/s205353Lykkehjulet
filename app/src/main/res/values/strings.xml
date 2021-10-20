@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">s205353Lykkehjulet</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="spin_wheel_text">>>>>  Spin the wheel  >>>>></string>
+    <string name="question_mark">\?</string>
+
+
 </resources>
