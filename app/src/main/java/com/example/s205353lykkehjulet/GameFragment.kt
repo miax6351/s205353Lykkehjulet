@@ -5,16 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.s205353lykkehjulet.databinding.FragmentHeartBinding
+import com.example.s205353lykkehjulet.databinding.FragmentGameBinding
 
 
 /**
  * A simple [Fragment] subclass.
- * Use the [HeartFragment.newInstance] factory method to
+ * Use the [GameFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HeartFragment : Fragment() {
-    private var _binding: FragmentHeartBinding? = null
+class GameFragment : Fragment() {
+    private var _binding: FragmentGameBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +26,7 @@ class HeartFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentHeartBinding.inflate(inflater, container, false)
+        _binding = FragmentGameBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
@@ -43,7 +43,7 @@ class HeartFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
-            HeartFragment().apply {
+            GameFragment().apply {
                 arguments = Bundle().apply {
                 }
             }

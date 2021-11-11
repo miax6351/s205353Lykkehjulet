@@ -3,6 +3,8 @@ package com.example.s205353lykkehjulet
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View.inflate
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import com.example.s205353lykkehjulet.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -10,14 +12,19 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     private var rightLetter = false
     private val player = Player()
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setContentView(R.layout.fragment_word_letter)
-        setContentView(R.layout.fragment_heart)
+
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
     }
+
+
 
     private fun spinTheWheel(){
 
