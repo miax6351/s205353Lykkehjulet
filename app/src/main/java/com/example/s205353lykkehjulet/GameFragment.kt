@@ -1,11 +1,21 @@
 package com.example.s205353lykkehjulet
 
+import android.graphics.drawable.ClipDrawable.HORIZONTAL
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.HorizontalScrollView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.s205353lykkehjulet.databinding.ActivityMainBinding
 import com.example.s205353lykkehjulet.databinding.FragmentGameBinding
+import androidx.recyclerview.widget.GridLayoutManager
+
+
+
 
 
 /**
@@ -16,9 +26,16 @@ import com.example.s205353lykkehjulet.databinding.FragmentGameBinding
 class GameFragment : Fragment() {
     private var _binding: FragmentGameBinding? = null
     private val binding get() = _binding!!
+    private var layoutManager: RecyclerView.LayoutManager? = null
+    private var adapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>? = null
+
+    private var game = Game()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
 
     }
 
@@ -28,6 +45,16 @@ class GameFragment : Fragment() {
     ): View? {
         _binding = FragmentGameBinding.inflate(inflater, container, false)
         val view = binding.root
+        layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false,)
+        binding.recyclerView.layoutManager = layoutManager
+        adapter = RecyclerAdapter()
+        binding.recyclerView.adapter = adapter
+
+
+        binding.spinWheelButton.setOnClickListener(){
+            game.spinTheWheel()
+        }
+
         return view
     }
 
