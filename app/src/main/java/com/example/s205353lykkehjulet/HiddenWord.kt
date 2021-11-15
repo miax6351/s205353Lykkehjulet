@@ -4,7 +4,7 @@ package com.example.s205353lykkehjulet
 class HiddenWord(word: String) {
 
 
-    private lateinit var questionMarkArray: Array<Char>
+    private var questionMarkArray: ArrayList<Char> = ArrayList()
     private var wordArray = word.toList()
 
 
@@ -21,9 +21,10 @@ class HiddenWord(word: String) {
 
     }
 
-    fun getQuestionMarkArray(): Array<Char>{
+    fun getQuestionMarkArray(): ArrayList<Char>{
+        //questionMarkArray = ArrayList<Char>(wordArray.size)
         for (i in 1..wordArray.size){
-            questionMarkArray[i] = '?'
+            questionMarkArray.add('?')
         }
         return questionMarkArray
     }

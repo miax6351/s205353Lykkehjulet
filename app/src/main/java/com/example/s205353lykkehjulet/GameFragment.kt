@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.HorizontalScrollView
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s205353lykkehjulet.databinding.ActivityMainBinding
@@ -30,6 +31,8 @@ class GameFragment : Fragment() {
     private var adapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>? = null
 
     private var game = Game()
+    // private var result = R.id.resultView
+    private var result: TextView? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,10 +52,12 @@ class GameFragment : Fragment() {
         binding.recyclerView.layoutManager = layoutManager
         adapter = RecyclerAdapter()
         binding.recyclerView.adapter = adapter
-
+        result = binding.resultView
 
         binding.spinWheelButton.setOnClickListener(){
             game.spinTheWheel()
+            result!!.setText(game.getResult())
+
         }
 
         return view

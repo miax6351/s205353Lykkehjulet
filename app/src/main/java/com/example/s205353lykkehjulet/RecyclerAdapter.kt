@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 
 class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
-    private var hiddenWord = HiddenWord("Dog")
+    private var hiddenWord = HiddenWord("fhhfjeahfalhfelfdal")
 
-    private var titles = hiddenWord.getHiddenWordArray()
+    private var titles = hiddenWord.getQuestionMarkArray()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.ViewHolder {
          val v = LayoutInflater.from(parent.context).inflate(R.layout.card_layout,parent,false)
