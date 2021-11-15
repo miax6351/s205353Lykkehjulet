@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.MainThread
+import androidx.core.view.get
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,11 +24,9 @@ class GameFragment : Fragment() {
     private var result: TextView? = null
     private val viewModel : GameViewModel by viewModels()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
+        game.startGame()
 
     }
 
@@ -38,8 +37,8 @@ class GameFragment : Fragment() {
         _binding = FragmentGameBinding.inflate(inflater, container, false)
         val view = binding.root
         layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false,)
-        binding.recyclerView.layoutManager = layoutManager
         adapter = RecyclerAdapter()
+        binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
         result = binding.resultView
 
@@ -67,6 +66,7 @@ class GameFragment : Fragment() {
         viewModel.currentResult.observe(viewLifecycleOwner, {
                 newWord -> binding.resultView.text = newWord
         })
+
 
     }
 

@@ -9,9 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
-    private var hiddenWord = HiddenWordOld("fhhfjeahfalhfelfdal")
-
-    private var titles = hiddenWord.getQuestionMarkArray()
+    private var titles = HiddenWord.getQuestionMarkArray()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.ViewHolder {
          val v = LayoutInflater.from(parent.context).inflate(R.layout.card_layout,parent,false)
@@ -27,6 +25,10 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
         return titles.size
     }
 
+    fun getTitles(): ArrayList<Char> {
+        return titles
+    }
+
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         var itemLetter : TextView
 
@@ -34,5 +36,7 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
             itemLetter = itemView.findViewById(R.id.letterView)
         }
     }
+
+
 
 }

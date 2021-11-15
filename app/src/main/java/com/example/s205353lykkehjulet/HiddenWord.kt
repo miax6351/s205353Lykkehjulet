@@ -4,15 +4,14 @@ object HiddenWord {
 
     private var word = ""
     private var questionMarkArray: ArrayList<Char> = ArrayList()
-    private var wordArray = word.toList()
-
+    private var wordArray : ArrayList<Char> = ArrayList()
 
     fun getHiddenWordArray(): List<Char> {
         return wordArray
     }
 
     fun displayLetterIfTrue(guess : Char){
-        for (i in 0..wordArray.size) {
+        for (i in 0..wordArray.size - 1) {
             if (guess.equals(wordArray[i])){
                 questionMarkArray[i] = wordArray[i]
             }
@@ -21,10 +20,14 @@ object HiddenWord {
     }
 
     fun getQuestionMarkArray(): ArrayList<Char>{
-        //questionMarkArray = ArrayList<Char>(wordArray.size)
-        for (i in 1..wordArray.size){
-            questionMarkArray.add('?')
+        wordArray = word.toList() as ArrayList<Char>
+        if (questionMarkArray.isEmpty()){
+            wordArray = word.toList() as ArrayList<Char>
+            for (i in 1..wordArray.size){
+                questionMarkArray.add('?')
+            }
         }
+
         return questionMarkArray
     }
 

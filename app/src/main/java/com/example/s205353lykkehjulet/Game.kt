@@ -2,21 +2,21 @@ package com.example.s205353lykkehjulet
 
 class Game {
 
-    private var guess = 'A'
     private var player = Player()
-    private var hiddenWordsArray = arrayOf(HiddenWordOld("Dog"),
-        HiddenWordOld("Cat"),HiddenWordOld("Lion"), HiddenWordOld("Rooster"), HiddenWordOld
-            ("Rabbit")
-    )
+    private var hiddenWordsArray = arrayOf("Cat","Dog","Rooster")
     private var result = ""
 
     fun startGame(){
 
-        HiddenWord.setWord(hiddenWordsArray.iterator().next().toString())
+        HiddenWord.setWord(hiddenWordsArray.iterator().next())
 
-        while (player.getLives() > 0){
-            HiddenWord.displayLetterIfTrue('?')
-        }
+        HiddenWord.displayLetterIfTrue('C')
+        print(HiddenWord.getQuestionMarkArray().toString())
+        HiddenWord.displayLetterIfTrue('A')
+        print(HiddenWord.getQuestionMarkArray().toString())
+        HiddenWord.displayLetterIfTrue('T')
+        print(HiddenWord.getQuestionMarkArray().toString())
+
 
     }
 
