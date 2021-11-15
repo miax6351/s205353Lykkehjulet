@@ -3,14 +3,13 @@ package com.example.s205353lykkehjulet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
-    var hiddenWord = HiddenWord()
+    private var hiddenWord = HiddenWord("Dog")
 
     private var titles = hiddenWord.getHiddenWordArray()
 
@@ -21,7 +20,7 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecyclerAdapter.ViewHolder, position: Int) {
-        holder.itemLetter.text = titles[position]
+        holder.itemLetter.text = titles[position].toString()
     }
 
     override fun getItemCount(): Int {
