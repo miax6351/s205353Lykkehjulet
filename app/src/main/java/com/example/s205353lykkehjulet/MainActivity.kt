@@ -3,6 +3,7 @@ package com.example.s205353lykkehjulet
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.lifecycle.Observer
 
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -25,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
-
 
     }
 

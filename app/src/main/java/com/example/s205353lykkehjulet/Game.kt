@@ -3,7 +3,6 @@ package com.example.s205353lykkehjulet
 class Game {
 
     private var guess = 'A'
-    private var guessedWord = arrayOf("?","?","?")
     private var player = Player()
     private var hiddenWordsArray = arrayOf(HiddenWordOld("Dog"),
         HiddenWordOld("Cat"),HiddenWordOld("Lion"), HiddenWordOld("Rooster"), HiddenWordOld
@@ -25,12 +24,14 @@ class Game {
     fun spinTheWheel(){
 
         var times = 0
-        while (times < 100){
+        while (times < 1){
             val spin = (Math.random() * Field.values().size).toInt()
-            System.out.println("*******************************************" + spin)
+            //System.out.println("*******************************************" + spin)
             times++
 
             val field : Field = Field.values().get(spin)
+            println("inside spin wheel")
+            println(field)
             setResult(field.toString())
 
             when (field){
