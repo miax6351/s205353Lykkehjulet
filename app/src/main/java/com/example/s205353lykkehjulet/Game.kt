@@ -1,26 +1,22 @@
 package com.example.s205353lykkehjulet
 
-import android.widget.TextView
-
 class Game {
-
 
     private var guess = 'A'
     private var guessedWord = arrayOf("?","?","?")
-    private lateinit var hiddenWord : HiddenWord
     private var player = Player()
-    private var hiddenWordsArray = arrayOf(HiddenWord("Dog"),
-        HiddenWord("Cat"),HiddenWord("Lion"), HiddenWord("Rooster"), HiddenWord
+    private var hiddenWordsArray = arrayOf(HiddenWordOld("Dog"),
+        HiddenWordOld("Cat"),HiddenWordOld("Lion"), HiddenWordOld("Rooster"), HiddenWordOld
             ("Rabbit")
     )
     private var result = ""
 
     fun startGame(){
 
-        hiddenWord = hiddenWordsArray.iterator().next()
+        HiddenWord.setWord(hiddenWordsArray.iterator().next().toString())
 
         while (player.getLives() > 0){
-            hiddenWord.displayLetterIfTrue('?')
+            HiddenWord.displayLetterIfTrue('?')
         }
 
     }

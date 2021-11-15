@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
-    private var hiddenWord = HiddenWord("fhhfjeahfalhfelfdal")
+    private var hiddenWord = HiddenWordOld("fhhfjeahfalhfelfdal")
 
     private var titles = hiddenWord.getQuestionMarkArray()
 

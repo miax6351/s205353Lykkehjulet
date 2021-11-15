@@ -1,8 +1,9 @@
 package com.example.s205353lykkehjulet
 
-object HiddenWord {
 
-    private var word = ""
+class HiddenWordOld(word: String) {
+
+
     private var questionMarkArray: ArrayList<Char> = ArrayList()
     private var wordArray = word.toList()
 
@@ -28,8 +29,5 @@ object HiddenWord {
         return questionMarkArray
     }
 
-    fun setWord(string : String){
-        word = string
-    }
 
 }
