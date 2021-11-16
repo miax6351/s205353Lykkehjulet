@@ -7,6 +7,7 @@ object HiddenWord {
     private var word = hiddenWordsArray[1]
     private var wordArray = word.toList() as ArrayList<Char>
     private var rightGuesses = 0;
+    private var letterIsRight : Boolean = false
 
 
     fun getHiddenWordArray(): List<Char> {
@@ -15,9 +16,11 @@ object HiddenWord {
 
     fun displayLetterIfTrue(guess : String){
         rightGuesses = 0
+        letterIsRight = false
         for (i in 0..wordArray.size - 1) {
             if (guess.equals(wordArray[i].toString(),true)){
                 getQuestionMarkArray()[i] = wordArray[i]
+                letterIsRight = true
                 rightGuesses++
             }
         }
@@ -36,6 +39,10 @@ object HiddenWord {
 
     fun getRightGuesses(): Int {
         return rightGuesses
+    }
+
+    fun ifLetterIsRight(): Boolean {
+        return letterIsRight
     }
 
 }

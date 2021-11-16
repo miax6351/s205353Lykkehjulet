@@ -26,7 +26,6 @@ class Game {
                 Field.VALUE -> {
                     pointsToWin = value.getRandomValue()
                     setResult(pointsToWin.toString())
-                    player.addPoints(pointsToWin * HiddenWord.getRightGuesses())
                 }
                 Field.EXTRA_TURN -> {
                     setResult(field.toString())
@@ -42,12 +41,29 @@ class Game {
 
     }
 
+    fun guessLetter(letter : String){
+        HiddenWord.displayLetterIfTrue(letter)
+        if (HiddenWord.ifLetterIsRight()){
+            player.addPoints(pointsToWin * HiddenWord.getRightGuesses())
+        }
+    }
+
+
+
     fun getResult(): String {
         return result
     }
 
     fun setResult(string : String){
         result = string
+    }
+
+    fun getPointsToWin(): Int {
+        return pointsToWin
+    }
+
+    fun getPlayer(): Player {
+        return player
     }
 
 }

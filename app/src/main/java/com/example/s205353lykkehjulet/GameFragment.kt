@@ -24,7 +24,7 @@ class GameFragment : Fragment() {
     private var result: TextView? = null
     private var points: TextView? = null
     private val viewModel : GameViewModel by viewModels()
-    private var player = Player()
+    private var player : Player? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,12 +46,13 @@ class GameFragment : Fragment() {
 
         result = binding.resultView
         points = binding.points
+        player = game.getPlayer()
 
 
         binding.spinWheelButton.setOnClickListener(){
             game.spinTheWheel()
             viewModel.setResultValue(game.getResult())
-            viewModel.setPointsValue(player.getPoints())
+            viewModel.setPointsValue(player!!.getPoints())
         }
 
         binding.guessButton.setOnClickListener(){
@@ -59,8 +60,10 @@ class GameFragment : Fragment() {
             println(binding.guessInputField.text.toString())
             print(HiddenWord.getQuestionMarkArray().toString())
             binding.guessInputField.text.clear()
-
-
+            if (HiddenWord.ifLetterIsRight())
+                player!!.addPoints(HiddenWord.getRightGuesses() * game.getPointsToWin())
+                viewModel.setPointsValue(player!!.getPoints())
+            println(player!!.getPoints().toString() + "************'")
         }
 
         return view
