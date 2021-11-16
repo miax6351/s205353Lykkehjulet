@@ -22,7 +22,9 @@ class GameFragment : Fragment() {
     private var adapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>? = null
     private var game = Game()
     private var result: TextView? = null
+    private var points: TextView? = null
     private val viewModel : GameViewModel by viewModels()
+    private var player = Player()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,22 +39,27 @@ class GameFragment : Fragment() {
         _binding = FragmentGameBinding.inflate(inflater, container, false)
         val view = binding.root
         layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false,)
+
         adapter = RecyclerAdapter()
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
+
         result = binding.resultView
+        points = binding.points
 
 
         binding.spinWheelButton.setOnClickListener(){
             game.spinTheWheel()
-            viewModel.setValue(game.getResult())
-            viewModel.setValue(HiddenWord.getQuestionMarkArray())
+            viewModel.setResultValue(game.getResult())
+            viewModel.setPointsValue(player.getPoints())
         }
 
-        binding.button.setOnClickListener(){
+        binding.guessButton.setOnClickListener(){
             HiddenWord.displayLetterIfTrue(binding.guessInputField.text.toString())
             println(binding.guessInputField.text.toString())
             print(HiddenWord.getQuestionMarkArray().toString())
+            binding.guessInputField.text.clear()
+
 
         }
 
@@ -65,15 +72,18 @@ class GameFragment : Fragment() {
         val gameObserver = Observer<String> { spin ->
             // Update the UI, in this case, a TextView.
             result?.text  = game.getResult()
+
         }
 
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
         viewModel.currentResult.observe(viewLifecycleOwner, {
                 newWord -> binding.resultView.text = newWord
         })
-        viewModel.currentQuestionMarkArray.observe(viewLifecycleOwner, {
-                newArray -> viewModel.currentQuestionMarkArray
+
+        viewModel.currentPoints.observe(viewLifecycleOwner, {
+                newPoints -> binding.points.text = newPoints.toString()
         })
+
 
 
     }

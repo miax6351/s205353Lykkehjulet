@@ -21,8 +21,16 @@ class Player {
         return loseStatus
     }
 
+    fun getPoints(): Int {
+        return points
+    }
+
     fun setPoints(newPoints: Int) {
         points = newPoints;
+    }
+
+    fun addPoints(newPoints: Int){
+        points += newPoints
     }
 
 }

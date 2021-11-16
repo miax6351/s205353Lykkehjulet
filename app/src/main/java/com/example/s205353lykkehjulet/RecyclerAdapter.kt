@@ -37,6 +37,10 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
         }
     }
 
+    fun setTitles(newArray : ArrayList<Char>){
+        titles = newArray
+    }
+
 
 
 }

@@ -2,8 +2,10 @@ package com.example.s205353lykkehjulet
 
 class Game {
 
+    private var value = Value()
     private var player = Player()
     private var result = ""
+    private var pointsToWin = 0
 
     fun startGame(){
 
@@ -13,24 +15,29 @@ class Game {
 
     fun spinTheWheel(){
 
-        var times = 0
-        while (times < 1){
+       // while (player.getLives() > 0){
             val spin = (Math.random() * Field.values().size).toInt()
-            //System.out.println("*******************************************" + spin)
-            times++
 
             val field : Field = Field.values().get(spin)
-            println("inside spin wheel")
-            println(field)
             setResult(field.toString())
+            println(field.toString())
 
             when (field){
-                Field.VALUE -> println("guess word")
-                Field.EXTRA_TURN -> spinTheWheel()
-                Field.MISSED_TURN -> break
-                Field.BANKRUPTCY -> player.setPoints(0)
+                Field.VALUE -> {
+                    pointsToWin = value.getRandomValue()
+                    setResult(pointsToWin.toString())
+                    player.addPoints(pointsToWin * HiddenWord.getRightGuesses())
+                }
+                Field.EXTRA_TURN -> {
+                    setResult(field.toString())
+                    spinTheWheel()
+                }
+                Field.MISSED_TURN -> println("")
+                Field.BANKRUPTCY -> {
+                    player.setPoints(0)
+                }
             }
-        }
+       // }
 
 
     }
