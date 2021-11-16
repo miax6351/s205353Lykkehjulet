@@ -45,9 +45,14 @@ class GameFragment : Fragment() {
 
         binding.spinWheelButton.setOnClickListener(){
             game.spinTheWheel()
-            println("onclick value")
-            println(game.getResult())
             viewModel.setValue(game.getResult())
+            viewModel.setValue(HiddenWord.getQuestionMarkArray())
+        }
+
+        binding.button.setOnClickListener(){
+            HiddenWord.displayLetterIfTrue(binding.guessInputField.text.toString())
+            println(binding.guessInputField.text.toString())
+            print(HiddenWord.getQuestionMarkArray().toString())
 
         }
 
@@ -65,6 +70,9 @@ class GameFragment : Fragment() {
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
         viewModel.currentResult.observe(viewLifecycleOwner, {
                 newWord -> binding.resultView.text = newWord
+        })
+        viewModel.currentQuestionMarkArray.observe(viewLifecycleOwner, {
+                newArray -> viewModel.currentQuestionMarkArray
         })
 
 

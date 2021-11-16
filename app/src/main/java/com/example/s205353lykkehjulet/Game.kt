@@ -3,19 +3,9 @@ package com.example.s205353lykkehjulet
 class Game {
 
     private var player = Player()
-    private var hiddenWordsArray = arrayOf("Cat","Dog","Rooster")
     private var result = ""
 
     fun startGame(){
-
-        HiddenWord.setWord(hiddenWordsArray.iterator().next())
-
-        HiddenWord.displayLetterIfTrue('C')
-        print(HiddenWord.getQuestionMarkArray().toString())
-        HiddenWord.displayLetterIfTrue('A')
-        print(HiddenWord.getQuestionMarkArray().toString())
-        HiddenWord.displayLetterIfTrue('T')
-        print(HiddenWord.getQuestionMarkArray().toString())
 
 
     }
