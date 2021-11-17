@@ -1,19 +1,19 @@
 package com.example.s205353lykkehjulet
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.MainThread
-import androidx.core.view.get
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s205353lykkehjulet.databinding.FragmentGameBinding
-
 
 class GameFragment : Fragment() {
     private var _binding: FragmentGameBinding? = null
@@ -25,6 +25,7 @@ class GameFragment : Fragment() {
     private var points: TextView? = null
     private val viewModel : GameViewModel by viewModels()
     private var player : Player? = null
+    private var luckyWheel : ImageView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,12 +48,18 @@ class GameFragment : Fragment() {
         result = binding.resultView
         points = binding.points
         player = game.getPlayer()
+        luckyWheel = binding.luckyWheel
 
 
         binding.spinWheelButton.setOnClickListener(){
             game.spinTheWheel()
-            viewModel.setResultValue(game.getResult())
-            viewModel.setPointsValue(player!!.getPoints())
+            spinningAnimation()
+            viewModel.setResultValue("")
+            Handler().postDelayed({
+                viewModel.setResultValue(game.getResult())
+                viewModel.setPointsValue(player!!.getPoints())
+            }, 1010)
+
         }
 
         binding.guessButton.setOnClickListener(){
@@ -89,6 +96,13 @@ class GameFragment : Fragment() {
 
 
 
+    }
+
+    fun spinningAnimation(){
+        val angle = Math.random() * 360
+        val animRotateClick = AnimationUtils.loadAnimation(context,R.anim.rotation)
+        luckyWheel!!.startAnimation(animRotateClick)
+        luckyWheel!!.setRotation(angle.toFloat())
     }
 
 
