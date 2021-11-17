@@ -14,6 +14,10 @@ class GameViewModel : ViewModel() {
     val currentPoints : LiveData<Int>
         get() = _currentPoints
 
+    private val _currentLives = MutableLiveData<Int>()
+    val currentLives : LiveData<Int>
+        get() = _currentLives
+
     private val _currentQuestionMarkArray = MutableLiveData<ArrayList<Char>>()
     val currentQuestionMarkArray : LiveData<ArrayList<Char>>
     get() = _currentQuestionMarkArray
@@ -30,5 +34,8 @@ class GameViewModel : ViewModel() {
         _currentPoints.value = points
     }
 
+    fun setLivesValue(lives : Int){
+        _currentLives.value = lives
+    }
 
 }

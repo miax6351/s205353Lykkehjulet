@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s205353lykkehjulet.databinding.FragmentGameBinding
@@ -26,6 +27,7 @@ class GameFragment : Fragment() {
     private val viewModel : GameViewModel by viewModels()
     private var player : Player? = null
     private var luckyWheel : ImageView? = null
+    private var lives: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +51,7 @@ class GameFragment : Fragment() {
         points = binding.points
         player = game.getPlayer()
         luckyWheel = binding.luckyWheel
+        lives = binding.lifeCount
 
 
         binding.spinWheelButton.setOnClickListener(){
@@ -64,13 +67,18 @@ class GameFragment : Fragment() {
 
         binding.guessButton.setOnClickListener(){
             HiddenWord.displayLetterIfTrue(binding.guessInputField.text.toString())
-            println(binding.guessInputField.text.toString())
-            print(HiddenWord.getQuestionMarkArray().toString())
             binding.guessInputField.text.clear()
-            if (HiddenWord.ifLetterIsRight())
+            if (HiddenWord.ifLetterIsRight()){
                 player!!.addPoints(HiddenWord.getRightGuesses() * game.getPointsToWin())
                 viewModel.setPointsValue(player!!.getPoints())
-            println(player!!.getPoints().toString() + "************'")
+                HiddenWord.setLetterIsRight(false)
+            } else {
+                player!!.loseLife()
+                viewModel.setLivesValue(player!!.getLives())
+                if (player!!.getLives() == 0)
+                    findNavController().navigate(R.id.action_gameFragment_to_lostFragment)
+            }
+
         }
 
         return view
@@ -92,6 +100,10 @@ class GameFragment : Fragment() {
 
         viewModel.currentPoints.observe(viewLifecycleOwner, {
                 newPoints -> binding.points.text = newPoints.toString()
+        })
+
+        viewModel.currentLives.observe(viewLifecycleOwner, {
+                newLives -> binding.lifeCount.text = newLives.toString()
         })
 
 

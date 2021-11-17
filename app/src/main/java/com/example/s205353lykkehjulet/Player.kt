@@ -11,10 +11,13 @@ class Player {
     }
 
     fun loseLife() {
-        lives--
-        if (lives == 0) {
-            loseStatus = true
+        if (lives > 0){
+            lives--
+        } else {
+            lives = 0
         }
+
+
     }
 
     fun getLoseStatus(): Boolean {

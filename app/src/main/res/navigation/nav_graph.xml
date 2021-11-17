@@ -20,6 +20,19 @@
         android:name="com.example.s205353lykkehjulet.GameFragment"
         android:label="fragment_email_login_view"
         tools:layout="@layout/fragment_game" >
+        <action
+            android:id="@+id/action_gameFragment_to_lostFragment"
+            app:destination="@id/lostGameFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/lostGameFragment"
+        android:name="com.example.s205353lykkehjulet.LostGameFragment"
+        android:label="fragment_lost_game"
+        tools:layout="@layout/fragment_lost_game" >
+        <action
+            android:id="@+id/action_lostGameFragment_to_fragment_landing_page"
+            app:destination="@id/fragment_landing_page" />
     </fragment>
 
 
