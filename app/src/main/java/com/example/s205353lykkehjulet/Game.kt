@@ -6,6 +6,7 @@ class Game {
     private var player = Player()
     private var result = ""
     private var pointsToWin = 0
+    private var isValue : Boolean = false
 
     fun startGame(){
 
@@ -14,8 +15,7 @@ class Game {
 
 
     fun spinTheWheel(){
-
-       // while (player.getLives() > 0){
+            isValue = false
             val spin = (Math.random() * Field.values().size).toInt()
 
             val field : Field = Field.values().get(spin)
@@ -26,6 +26,7 @@ class Game {
                 Field.VALUE -> {
                     pointsToWin = value.getRandomValue()
                     setResult(pointsToWin.toString())
+                    isValue = true
                 }
                 Field.EXTRA_TURN -> {
                     setResult(field.toString())
@@ -36,7 +37,6 @@ class Game {
                     player.setPoints(0)
                 }
             }
-       // }
 
 
     }
@@ -64,6 +64,10 @@ class Game {
 
     fun getPlayer(): Player {
         return player
+    }
+
+    fun getIsValue(): Boolean {
+        return isValue
     }
 
 }

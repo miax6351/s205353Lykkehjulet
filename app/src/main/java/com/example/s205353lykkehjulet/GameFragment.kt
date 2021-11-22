@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.fragment.app.*
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -59,15 +60,26 @@ class GameFragment : Fragment() {
         luckyWheel = binding.luckyWheel
         lives = binding.lifeCount
 
+        binding.guessInputField.setVisibility(View.GONE)
+        binding.guessButton.setVisibility(View.GONE)
+
 
 
         binding.spinWheelButton.setOnClickListener(){
             game.spinTheWheel()
+
             spinningAnimation()
             viewModel.setResultValue("")
             Handler().postDelayed({
                 viewModel.setResultValue(game.getResult())
                 viewModel.setPointsValue(player!!.getPoints())
+                if (game.getIsValue()){
+                    binding.guessInputField.setVisibility(View.VISIBLE)
+                    binding.guessButton.setVisibility(View.VISIBLE)
+                } else {
+                    binding.guessInputField.setVisibility(View.GONE)
+                    binding.guessButton.setVisibility(View.GONE)
+                }
             }, 1010)
 
         }
@@ -82,8 +94,6 @@ class GameFragment : Fragment() {
                 for (i in 0..HiddenWord.getHiddenWordArray().size - 1) {
                     viewModel.setQuestionValue(HiddenWord.getQuestionMarkArray()[i])
                 }
-               findNavController().navigate(R.id.action_gameFragment_to_lostFragment)
-                findNavController().navigate(R.id.action_lostGameFragment_to_heartFragment)
 
 
 
