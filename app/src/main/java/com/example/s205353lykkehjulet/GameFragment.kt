@@ -83,8 +83,7 @@ class GameFragment : Fragment() {
                     viewModel.setQuestionValue(HiddenWord.getQuestionMarkArray()[i])
                 }
                findNavController().navigate(R.id.action_gameFragment_to_lostFragment)
-                
-                getActivity()?.onBackPressed();
+                findNavController().navigate(R.id.action_lostGameFragment_to_heartFragment)
 
 
 
@@ -98,6 +97,7 @@ class GameFragment : Fragment() {
 
         return view
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
