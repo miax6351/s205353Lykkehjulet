@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_lostGameFragment_to_fragment_landing_page"
             app:destination="@id/fragment_landing_page" />
+        <action
+            android:id="@+id/action_lostGameFragment_to_heartFragment"
+            app:destination="@id/heartFragment" />
     </fragment>
 
 

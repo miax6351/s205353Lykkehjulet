@@ -1,15 +1,17 @@
 package com.example.s205353lykkehjulet
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
+import android.text.TextUtils.replace
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.*
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +21,8 @@ import com.example.s205353lykkehjulet.databinding.FragmentGameBinding
 class GameFragment : Fragment() {
     private var _binding: FragmentGameBinding? = null
     private val binding get() = _binding!!
+    private var _cardBinding: RecyclerAdapter? = null
+    private val cardBinding get() = _cardBinding!!
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>? = null
     private var game = Game()
@@ -35,15 +39,17 @@ class GameFragment : Fragment() {
 
     }
 
+    @SuppressLint("RestrictedApi", "ResourceType")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentGameBinding.inflate(inflater, container, false)
         val view = binding.root
-        layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false,)
+        layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         adapter = RecyclerAdapter()
+        _cardBinding = RecyclerAdapter()
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
 
@@ -52,6 +58,7 @@ class GameFragment : Fragment() {
         player = game.getPlayer()
         luckyWheel = binding.luckyWheel
         lives = binding.lifeCount
+
 
 
         binding.spinWheelButton.setOnClickListener(){
@@ -72,14 +79,22 @@ class GameFragment : Fragment() {
                 player!!.addPoints(HiddenWord.getRightGuesses() * game.getPointsToWin())
                 viewModel.setPointsValue(player!!.getPoints())
                 HiddenWord.setLetterIsRight(false)
+                for (i in 0..HiddenWord.getHiddenWordArray().size - 1) {
+                    viewModel.setQuestionValue(HiddenWord.getQuestionMarkArray()[i])
+                }
+               findNavController().navigate(R.id.action_gameFragment_to_lostFragment)
+                
+                getActivity()?.onBackPressed();
+
+
+
             } else {
                 player!!.loseLife()
                 viewModel.setLivesValue(player!!.getLives())
                 if (player!!.getLives() == 0)
                     findNavController().navigate(R.id.action_gameFragment_to_lostFragment)
+                }
             }
-
-        }
 
         return view
     }
@@ -106,6 +121,10 @@ class GameFragment : Fragment() {
                 newLives -> binding.lifeCount.text = newLives.toString()
         })
 
+
+      viewModel.currentQuestionMarkArray.observe(viewLifecycleOwner, {
+              newQuestionMarkArray -> cardBinding.ViewHolder(view).itemLetter.text = newQuestionMarkArray.toString()
+      })
 
 
     }

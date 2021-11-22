@@ -25,8 +25,8 @@ class LostGameFragment : Fragment() {
 
         _binding = FragmentLostGameBinding.inflate(inflater, container, false)
 
-        binding.button.setOnClickListener {
-            findNavController().navigate(R.id.action_lostGameFragment_to_fragment_landing_page) }
+     //   binding.button.setOnClickListener {
+     //       findNavController().navigate(R.id.action_lostGameFragment_to_fragment_landing_page) }
 
         return binding.root
     }

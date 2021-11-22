@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class GameViewModel : ViewModel() {
+class GameViewModel : ViewModel(){
 
     private val _currentResult = MutableLiveData<String>()
     val currentResult : LiveData<String>
@@ -18,16 +18,24 @@ class GameViewModel : ViewModel() {
     val currentLives : LiveData<Int>
         get() = _currentLives
 
-    private val _currentQuestionMarkArray = MutableLiveData<ArrayList<Char>>()
-    val currentQuestionMarkArray : LiveData<ArrayList<Char>>
+    private val _currentQuestionMarkArray = MutableLiveData<MutableList<Char>>()
+    val currentQuestionMarkArray : LiveData<MutableList<Char>>
     get() = _currentQuestionMarkArray
+
+
 
     fun setResultValue(string : String){
         _currentResult.value = string
     }
 
-    fun setQuestionValue(questionMarkArray : ArrayList<Char>){
-        _currentQuestionMarkArray.value = questionMarkArray
+ fun setQuestionMarkValue(questionMarkArray : ArrayList<Char>){
+         _currentQuestionMarkArray.value = questionMarkArray
+ }
+
+    fun setQuestionValue(char : Char){
+        for (i in 0..HiddenWord.getHiddenWordArray().size - 1) {
+            _currentQuestionMarkArray.value?.set(i, char)
+        }
     }
 
     fun setPointsValue(points : Int){
@@ -37,5 +45,6 @@ class GameViewModel : ViewModel() {
     fun setLivesValue(lives : Int){
         _currentLives.value = lives
     }
+
 
 }
