@@ -76,6 +76,7 @@ class GameFragment : Fragment() {
                 if (game.getIsValue()){
                     binding.guessInputField.setVisibility(View.VISIBLE)
                     binding.guessButton.setVisibility(View.VISIBLE)
+                    binding.spinWheelButton.setVisibility(View.GONE)
                 } else {
                     binding.guessInputField.setVisibility(View.GONE)
                     binding.guessButton.setVisibility(View.GONE)

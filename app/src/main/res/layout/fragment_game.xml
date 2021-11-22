@@ -58,13 +58,15 @@
         android:id="@+id/spinWheelButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="118dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/spin_button"
-        app:layout_constraintBottom_toTopOf="@id/guess_input_field"
+        app:layout_constraintBottom_toTopOf="@+id/guess_input_field"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/luckyWheel">
+        app:layout_constraintTop_toBottomOf="@+id/luckyWheel">
 
     </Button>
 
@@ -72,12 +74,14 @@
         android:id="@+id/guess_input_field"
         android:layout_width="30dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="75dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginBottom="10dp"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guess_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/luckyWheel">
 
     </EditText>
 
@@ -85,14 +89,15 @@
         android:id="@+id/guess_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginBottom="92dp"
         android:text="GUESS"
-        app:layout_constraintBottom_toTopOf="@id/guess_input_field"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/spinWheelButton"
-        app:layout_constraintTop_toBottomOf="@+id/luckyWheel">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guess_input_field">
         app:layout_constraintVertical_bias="0.285"></Button>
 
     <ImageView
