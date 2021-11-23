@@ -14,6 +14,9 @@ class Game {
     private var gameWon = false
 
 
+    fun startGame(){
+        HiddenWord.getQuestionMarkArray().clear()
+    }
 
     fun spinTheWheel(){
             isValue = false

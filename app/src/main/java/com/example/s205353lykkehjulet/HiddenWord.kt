@@ -4,7 +4,7 @@ object HiddenWord {
 
     private var questionMarkArray: ArrayList<Char> = ArrayList()
     private var hiddenWordsArray = arrayOf("Cat","Dog","Rooster","Coca Cola")
-    private var word = hiddenWordsArray[3]
+    private var word = hiddenWordsArray[2]
     private var wordArray = word.toList() as ArrayList<Char>
     private var rightGuesses = 0;
     private var letterIsRight : Boolean = false

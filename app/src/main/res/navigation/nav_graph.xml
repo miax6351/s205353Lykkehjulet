@@ -12,17 +12,20 @@
         tools:layout="@layout/fragment_landing_page" >
         <action
             android:id="@+id/action_fragment_landing_page_to_heartFragment"
-            app:destination="@id/heartFragment" />
+            app:destination="@id/gameFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/heartFragment"
+        android:id="@+id/gameFragment"
         android:name="com.example.s205353lykkehjulet.GameFragment"
         android:label="fragment_email_login_view"
         tools:layout="@layout/fragment_game" >
         <action
             android:id="@+id/action_gameFragment_to_lostFragment"
             app:destination="@id/lostGameFragment" />
+        <action
+            android:id="@+id/action_heartFragment_to_wonGameFragment"
+            app:destination="@id/wonGameFragment" />
     </fragment>
 
     <fragment
@@ -35,7 +38,22 @@
             app:destination="@id/fragment_landing_page" />
         <action
             android:id="@+id/action_lostGameFragment_to_heartFragment"
-            app:destination="@id/heartFragment" />
+            app:destination="@id/gameFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/wonGameFragment"
+        android:name="com.example.s205353lykkehjulet.WonGameFragment"
+        android:label="fragmnet_won_game"
+        tools:layout="@layout/fragment_won_game" >
+        <action
+            android:id="@+id/action_heartFragment_to_wonGameFragment"
+            app:destination="@id/gameFragment" />
+        <action
+            android:id="@+id/action_wonGameFragment_to_fragment_landing_page"
+            app:destination="@id/fragment_landing_page" />
+
+
     </fragment>
 
 

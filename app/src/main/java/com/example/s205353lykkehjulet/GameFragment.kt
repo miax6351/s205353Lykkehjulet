@@ -4,27 +4,19 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
-import android.text.TextUtils.replace
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.view.isVisible
 import androidx.fragment.app.*
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s205353lykkehjulet.databinding.FragmentGameBinding
-import android.content.Context.INPUT_METHOD_SERVICE
 import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat
-
-import androidx.core.content.ContextCompat.getSystemService
-
 
 
 
@@ -32,7 +24,6 @@ class GameFragment : Fragment() {
     private var _binding: FragmentGameBinding? = null
     private val binding get() = _binding!!
     private var _cardBinding: RecyclerAdapter? = null
-    private val cardBinding get() = _cardBinding!!
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>? = null
     private var game = Game()
@@ -45,13 +36,14 @@ class GameFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        game.startGame()
     }
 
     @SuppressLint("RestrictedApi", "ResourceType")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentGameBinding.inflate(inflater, container, false)
         val view = binding.root
         layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -91,7 +83,7 @@ class GameFragment : Fragment() {
             binding.guessInputField.text.clear()
             if (HiddenWord.ifLetterIsRight()){
                 if (game.isGameWon()){
-                    findNavController().navigate(R.id.action_gameFragment_to_lostFragment)
+                    findNavController().navigate(R.id.action_heartFragment_to_wonGameFragment)
                 }
                 player!!.addPoints(HiddenWord.getRightGuesses() * game.getPointsToWin())
                 viewModel.setPointsValue(player!!.getPoints())
@@ -115,12 +107,6 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Create the observer which updates the UI.
-        val gameObserver = Observer<String> { spin ->
-            // Update the UI, in this case, a TextView.
-            result?.text  = game.getResult()
-
-        }
 
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
         viewModel.currentResult.observe(viewLifecycleOwner, {
