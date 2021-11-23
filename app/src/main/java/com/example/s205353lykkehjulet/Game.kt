@@ -1,5 +1,9 @@
 package com.example.s205353lykkehjulet
 
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
+
 class Game {
 
     private var value = Value()
@@ -7,16 +11,8 @@ class Game {
     private var result = ""
     private var pointsToWin = 0
     private var isValue : Boolean = false
+    private var gameWon = false
 
-    fun spinPhase(){
-
-
-    }
-
-    fun guessPhase(){
-
-
-    }
 
 
     fun spinTheWheel(){
@@ -53,6 +49,22 @@ class Game {
         }
     }
 
+    fun isGameWon() : Boolean{
+        var hiddenword = HiddenWord.getHiddenWordArray()
+        var guessedword = HiddenWord.getQuestionMarkArray()
+        var realGuessedWord = ArrayList<Char>()
+
+        for (i in 0..guessedword.size - 1){
+            if (guessedword[i].equals('-')){
+                realGuessedWord.add(' ')
+            } else {
+                realGuessedWord.add(guessedword[i])
+            }
+        }
+
+        gameWon = realGuessedWord.equals(hiddenword)
+        return gameWon
+    }
 
 
     fun getResult(): String {

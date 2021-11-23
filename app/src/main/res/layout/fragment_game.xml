@@ -65,8 +65,10 @@
         android:text="@string/spin_button"
         app:layout_constraintBottom_toTopOf="@+id/guess_input_field"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/luckyWheel">
+        app:layout_constraintTop_toBottomOf="@+id/luckyWheel"
+        app:layout_constraintVertical_bias="0.543">
 
     </Button>
 
@@ -76,6 +78,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="19dp"
         android:layout_marginBottom="10dp"
+        android:inputType="text"
+        android:maxLength="1"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@id/guess_button"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,12 +94,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="161dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="162dp"
-        android:layout_marginBottom="92dp"
+        android:layout_marginBottom="116dp"
         android:text="GUESS"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guess_input_field">
         app:layout_constraintVertical_bias="0.285"></Button>

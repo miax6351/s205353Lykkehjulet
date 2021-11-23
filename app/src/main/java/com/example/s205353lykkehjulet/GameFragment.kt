@@ -1,6 +1,7 @@
 package com.example.s205353lykkehjulet
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.text.TextUtils.replace
@@ -18,6 +19,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s205353lykkehjulet.databinding.FragmentGameBinding
+import android.content.Context.INPUT_METHOD_SERVICE
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat
+
+import androidx.core.content.ContextCompat.getSystemService
+
+
+
 
 class GameFragment : Fragment() {
     private var _binding: FragmentGameBinding? = null
@@ -63,16 +72,17 @@ class GameFragment : Fragment() {
 
         binding.spinWheelButton.setOnClickListener(){
             game.spinTheWheel()
-
             spinningAnimation()
             viewModel.setResultValue("")
             Handler().postDelayed({
                 viewModel.setResultValue(game.getResult())
                 viewModel.setPointsValue(player!!.getPoints())
                 if (game.getIsValue()){
+                    //TODO Seperat metode
                     binding.guessInputField.setVisibility(View.VISIBLE)
                     binding.guessButton.setVisibility(View.VISIBLE)
                     binding.spinWheelButton.setVisibility(View.GONE)
+                    binding.luckyWheel.setVisibility(View.GONE)
                 } else {
                     binding.guessInputField.setVisibility(View.GONE)
                     binding.guessButton.setVisibility(View.GONE)
@@ -85,6 +95,9 @@ class GameFragment : Fragment() {
             HiddenWord.displayLetterIfTrue(binding.guessInputField.text.toString())
             binding.guessInputField.text.clear()
             if (HiddenWord.ifLetterIsRight()){
+                if (game.isGameWon()){
+                    findNavController().navigate(R.id.action_gameFragment_to_lostFragment)
+                }
                 player!!.addPoints(HiddenWord.getRightGuesses() * game.getPointsToWin())
                 viewModel.setPointsValue(player!!.getPoints())
                 (adapter as RecyclerAdapter).notifyDataSetChanged()
@@ -96,6 +109,14 @@ class GameFragment : Fragment() {
                 if (player!!.getLives() == 0)
                     findNavController().navigate(R.id.action_gameFragment_to_lostFragment)
                 }
+
+            binding.spinWheelButton.setVisibility(View.VISIBLE)
+            binding.luckyWheel.setVisibility(View.VISIBLE)
+            binding.guessButton.setVisibility(View.GONE)
+            binding.guessInputField.setVisibility(View.GONE)
+            view.hideKeyboard()
+
+
             }
 
         return view
@@ -133,9 +154,14 @@ class GameFragment : Fragment() {
         luckyWheel!!.setRotation(angle.toFloat())
     }
 
+    private fun View.hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
+    }
+
+
 
 }
-
 
 
 
