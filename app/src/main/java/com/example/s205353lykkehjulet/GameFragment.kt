@@ -78,14 +78,9 @@ class GameFragment : Fragment() {
                 viewModel.setResultValue(game.getResult())
                 viewModel.setPointsValue(player!!.getPoints())
                 if (game.getIsValue()){
-                    //TODO Seperat metode
-                    binding.guessInputField.setVisibility(View.VISIBLE)
-                    binding.guessButton.setVisibility(View.VISIBLE)
-                    binding.spinWheelButton.setVisibility(View.GONE)
-                    binding.luckyWheel.setVisibility(View.GONE)
+                    makeGuessView()
                 } else {
-                    binding.guessInputField.setVisibility(View.GONE)
-                    binding.guessButton.setVisibility(View.GONE)
+                    otherFieldView()
                 }
             }, 1010)
 
@@ -110,12 +105,7 @@ class GameFragment : Fragment() {
                     findNavController().navigate(R.id.action_gameFragment_to_lostFragment)
                 }
 
-            binding.spinWheelButton.setVisibility(View.VISIBLE)
-            binding.luckyWheel.setVisibility(View.VISIBLE)
-            binding.guessButton.setVisibility(View.GONE)
-            binding.guessInputField.setVisibility(View.GONE)
-            view.hideKeyboard()
-
+            afterGuessingView()
 
             }
 
@@ -157,6 +147,26 @@ class GameFragment : Fragment() {
     private fun View.hideKeyboard() {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(windowToken, 0)
+    }
+
+    private fun makeGuessView(){
+        binding.guessInputField.setVisibility(View.VISIBLE)
+        binding.guessButton.setVisibility(View.VISIBLE)
+        binding.spinWheelButton.setVisibility(View.GONE)
+        binding.luckyWheel.setVisibility(View.GONE)
+    }
+    private fun afterGuessingView(){
+        binding.spinWheelButton.setVisibility(View.VISIBLE)
+        binding.luckyWheel.setVisibility(View.VISIBLE)
+        binding.guessButton.setVisibility(View.GONE)
+        binding.guessInputField.setVisibility(View.GONE)
+        view?.hideKeyboard()
+
+    }
+
+    private fun otherFieldView(){
+        binding.guessInputField.setVisibility(View.GONE)
+        binding.guessButton.setVisibility(View.GONE)
     }
 
 
