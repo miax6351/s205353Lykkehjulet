@@ -36,8 +36,6 @@ class GameFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        game.startGame()
-
     }
 
     @SuppressLint("RestrictedApi", "ResourceType")
@@ -89,6 +87,7 @@ class GameFragment : Fragment() {
             if (HiddenWord.ifLetterIsRight()){
                 player!!.addPoints(HiddenWord.getRightGuesses() * game.getPointsToWin())
                 viewModel.setPointsValue(player!!.getPoints())
+                (adapter as RecyclerAdapter).notifyDataSetChanged()
                 HiddenWord.setLetterIsRight(false)
 
             } else {
@@ -124,12 +123,6 @@ class GameFragment : Fragment() {
         viewModel.currentLives.observe(viewLifecycleOwner, {
                 newLives -> binding.lifeCount.text = newLives.toString()
         })
-
-
-      viewModel.currentQuestionMarkArray.observe(viewLifecycleOwner, {
-              newQuestionMarkArray -> cardBinding.ViewHolder(view).itemLetter.text = newQuestionMarkArray.toString()
-      })
-
 
     }
 

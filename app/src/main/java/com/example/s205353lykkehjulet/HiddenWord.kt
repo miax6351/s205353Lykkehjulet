@@ -3,8 +3,8 @@ package com.example.s205353lykkehjulet
 object HiddenWord {
 
     private var questionMarkArray: ArrayList<Char> = ArrayList()
-    private var hiddenWordsArray = arrayOf("Cat","Dog","Cloud")
-    private var word = hiddenWordsArray[2]
+    private var hiddenWordsArray = arrayOf("Cat","Dog","Rooster","Coca Cola")
+    private var word = hiddenWordsArray[3]
     private var wordArray = word.toList() as ArrayList<Char>
     private var rightGuesses = 0;
     private var letterIsRight : Boolean = false
@@ -31,7 +31,11 @@ object HiddenWord {
 
         if (questionMarkArray.isEmpty()){
             for (i in 1..wordArray.size){
-                questionMarkArray.add('?')
+                if (wordArray[i - 1].equals(' ')){
+                    questionMarkArray.add('-')
+                } else {
+                    questionMarkArray.add('?')
+                }
             }
         }
         return questionMarkArray

@@ -18,25 +18,11 @@ class GameViewModel : ViewModel(){
     val currentLives : LiveData<Int>
         get() = _currentLives
 
-    private val _currentQuestionMarkArray = MutableLiveData<MutableList<Char>>()
-    val currentQuestionMarkArray : LiveData<MutableList<Char>>
-    get() = _currentQuestionMarkArray
-
-
 
     fun setResultValue(string : String){
         _currentResult.value = string
     }
 
- fun setQuestionMarkValue(questionMarkArray : ArrayList<Char>){
-         _currentQuestionMarkArray.value = questionMarkArray
- }
-
-    fun setQuestionValue(char : Char){
-        for (i in 0..HiddenWord.getHiddenWordArray().size - 1) {
-            _currentQuestionMarkArray.value?.set(i, char)
-        }
-    }
 
     fun setPointsValue(points : Int){
         _currentPoints.value = points

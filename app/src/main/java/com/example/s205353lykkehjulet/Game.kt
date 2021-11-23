@@ -8,7 +8,12 @@ class Game {
     private var pointsToWin = 0
     private var isValue : Boolean = false
 
-    fun startGame(){
+    fun spinPhase(){
+
+
+    }
+
+    fun guessPhase(){
 
 
     }
