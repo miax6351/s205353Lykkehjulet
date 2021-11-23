@@ -63,8 +63,6 @@ class GameFragment : Fragment() {
         binding.guessInputField.setVisibility(View.GONE)
         binding.guessButton.setVisibility(View.GONE)
 
-
-
         binding.spinWheelButton.setOnClickListener(){
             game.spinTheWheel()
 
@@ -92,11 +90,6 @@ class GameFragment : Fragment() {
                 player!!.addPoints(HiddenWord.getRightGuesses() * game.getPointsToWin())
                 viewModel.setPointsValue(player!!.getPoints())
                 HiddenWord.setLetterIsRight(false)
-                for (i in 0..HiddenWord.getHiddenWordArray().size - 1) {
-                    viewModel.setQuestionValue(HiddenWord.getQuestionMarkArray()[i])
-                }
-
-
 
             } else {
                 player!!.loseLife()
