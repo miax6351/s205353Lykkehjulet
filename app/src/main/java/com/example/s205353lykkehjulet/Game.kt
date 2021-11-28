@@ -24,7 +24,6 @@ class Game {
 
             val field : Field = Field.values().get(spin)
             setResult(field.toString())
-            println(field.toString())
 
             when (field){
                 Field.VALUE -> {
