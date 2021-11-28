@@ -6,7 +6,8 @@ object HiddenWord {
 
     private var questionMarkArray: ArrayList<Char> = ArrayList()
     private var hiddenWordsArray = arrayOf("Cat","Dog","Rooster","Coca Cola")
-    private var word = hiddenWordsArray[(Random.nextInt(0, hiddenWordsArray.size - 1))]
+    private var word = hiddenWordsArray[0]
+    //private var word = hiddenWordsArray[(Random.nextInt(0, hiddenWordsArray.size - 1))]
     private var wordArray = word.toList() as ArrayList<Char>
     private var rightGuesses = 0;
     private var letterIsRight : Boolean = false
@@ -29,8 +30,8 @@ object HiddenWord {
         }
         // To ensure you only get points for one letter at a time
         for (i in (wordArray.size - 1) downTo 0){
-            if (wordArray[i].equals(getQuestionMarkArray()[i]))
-                wordArray[i] = ' '
+//            if (wordArray[i].equals(getQuestionMarkArray()[i]))
+//                wordArray[i] = ' '
 
         }
 
@@ -61,5 +62,6 @@ object HiddenWord {
     fun setLetterIsRight(value : Boolean){
         letterIsRight = value
     }
+
 
 }

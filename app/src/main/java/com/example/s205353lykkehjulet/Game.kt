@@ -35,7 +35,7 @@ class Game {
                     setResult(field.toString())
                     player.addLife()
                 }
-                Field.MISSED_TURN -> println("")
+                Field.MISSED_TURN -> player.loseLife()
                 Field.BANKRUPTCY -> {
                     player.setPoints(0)
                 }
