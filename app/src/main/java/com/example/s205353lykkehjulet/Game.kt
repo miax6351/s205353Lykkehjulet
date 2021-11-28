@@ -33,7 +33,7 @@ class Game {
                 }
                 Field.EXTRA_TURN -> {
                     setResult(field.toString())
-                    spinTheWheel()
+                    player.addLife()
                 }
                 Field.MISSED_TURN -> println("")
                 Field.BANKRUPTCY -> {

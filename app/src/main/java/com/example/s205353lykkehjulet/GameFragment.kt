@@ -69,13 +69,13 @@ class GameFragment : Fragment() {
             Handler().postDelayed({
                 viewModel.setResultValue(game.getResult())
                 viewModel.setPointsValue(player!!.getPoints())
+                viewModel.setLivesValue(player!!.getLives())
                 if (game.getIsValue()){
                     makeGuessView()
                 } else {
                     otherFieldView()
                 }
             }, 1010)
-
         }
 
         binding.guessButton.setOnClickListener(){

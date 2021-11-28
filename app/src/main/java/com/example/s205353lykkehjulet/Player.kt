@@ -12,12 +12,14 @@ class Player {
 
     fun loseLife() {
         if (lives > 0){
-            lives--
+            setLives(lives - 1)
         } else {
             lives = 0
         }
+    }
 
-
+    fun addLife(){
+        setLives(lives + 1)
     }
 
     fun getLoseStatus(): Boolean {
@@ -34,6 +36,10 @@ class Player {
 
     fun addPoints(newPoints: Int){
         points += newPoints
+    }
+
+    private fun setLives(change : Int){
+        lives = change
     }
 
 }

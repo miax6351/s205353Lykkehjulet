@@ -30,7 +30,7 @@ object HiddenWord {
         // To ensure you only get points for one letter at a time
         for (i in (wordArray.size - 1) downTo 0){
             if (wordArray[i].equals(getQuestionMarkArray()[i]))
-                wordArray.remove(wordArray[i])
+                wordArray[i] = ' '
 
         }
 
