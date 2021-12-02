@@ -48,8 +48,8 @@ class GameFragment : Fragment() {
         _binding = FragmentGameBinding.inflate(inflater, container, false)
         val view = binding.root
         layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        adapter = RecyclerAdapter()
-        _cardBinding = RecyclerAdapter()
+        adapter = RecyclerAdapter(game)
+        _cardBinding = RecyclerAdapter(game)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
 

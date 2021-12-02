@@ -18,7 +18,6 @@ class Game {
     fun startGame(){
         hiddenWord = HiddenWord()
         hiddenWord.getQuestionMarkArray().clear()
-        Word.setQuestionMarkArray(hiddenWord.getQuestionMarkArray())
     }
 
     fun spinTheWheel(){
