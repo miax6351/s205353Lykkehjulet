@@ -29,15 +29,17 @@ class GameFragment : Fragment() {
     private var _cardBinding: RecyclerAdapter? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>? = null
+    private var heartAdapter : RecyclerView.Adapter<HeartRecyclerAdapter.ViewHolder>? = null
     private var game = Game()
     private var result: TextView? = null
     private var points: TextView? = null
     private var topic: TextView? = null
     private val gameViewModel : GameViewModel by viewModels()
     private val topicsViewModel : TopicsViewModel by viewModels()
-    private var player : Player? = null
+    private var player = game.getPlayer()
     private var luckyWheel : ImageView? = null
     private var lives: TextView? = null
+    private var layoutManagerHearts: RecyclerView.LayoutManager? = null
     private lateinit var hiddenWord : HiddenWord
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +47,7 @@ class GameFragment : Fragment() {
         game.startGame()
         hiddenWord = game.getHiddenWord()
         topicsViewModel.setTopic(hiddenWord.getTopic())
+        player = game.getPlayer()
     }
 
     override fun onCreateView(
@@ -54,14 +57,17 @@ class GameFragment : Fragment() {
         _binding = FragmentGameBinding.inflate(inflater, container, false)
         val view = binding.root
         layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        layoutManagerHearts = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         adapter = RecyclerAdapter(game)
+        heartAdapter = HeartRecyclerAdapter(player)
         _cardBinding = RecyclerAdapter(game)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
+        binding.heartRecyclerView.layoutManager = layoutManagerHearts
+        binding.heartRecyclerView.adapter = heartAdapter
         topic = binding.topicTextview
         result = binding.resultView
         points = binding.points
-        player = game.getPlayer()
         luckyWheel = binding.luckyWheel
         lives = binding.lifeCount
 
