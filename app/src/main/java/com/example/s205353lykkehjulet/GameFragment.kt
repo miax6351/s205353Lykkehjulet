@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s205353lykkehjulet.databinding.FragmentGameBinding
 import android.view.inputmethod.InputMethodManager
-
+import com.example.s205353lykkehjulet.databinding.FragmentWonGameBinding
 
 
 class GameFragment : Fragment() {
@@ -39,7 +39,6 @@ class GameFragment : Fragment() {
         game.startGame()
     }
 
-    @SuppressLint("RestrictedApi", "ResourceType")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,7 +46,6 @@ class GameFragment : Fragment() {
         _binding = FragmentGameBinding.inflate(inflater, container, false)
         val view = binding.root
         layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
         adapter = RecyclerAdapter()
         _cardBinding = RecyclerAdapter()
         binding.recyclerView.layoutManager = layoutManager
@@ -121,6 +119,7 @@ class GameFragment : Fragment() {
                 newLives -> binding.lifeCount.text = newLives.toString()
         })
 
+
     }
 
     fun spinningAnimation(){
@@ -154,6 +153,12 @@ class GameFragment : Fragment() {
         binding.guessInputField.setVisibility(View.GONE)
         binding.guessButton.setVisibility(View.GONE)
     }
+
+    override fun onDestroy(){
+        super.onDestroy()
+    }
+
+
 
 
 

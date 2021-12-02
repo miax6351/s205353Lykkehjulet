@@ -3,7 +3,10 @@
     <string name="question_mark">\?</string>
     <string name="spin_button">SPIN</string>
     <string name="lostText">Damn, ya ran out of lives</string>
-
+    <string name="congrats">Congrats!</string>
+    <string name="ya_guessed_the_word">ya guessed the word</string>
+    <string name="play_again">Play again?</string>
+    <string name="score">Score:</string>
 
 
 </resources>

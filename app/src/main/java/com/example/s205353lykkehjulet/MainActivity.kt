@@ -2,7 +2,9 @@ package com.example.s205353lykkehjulet
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 
 import androidx.navigation.NavController
@@ -15,7 +17,6 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

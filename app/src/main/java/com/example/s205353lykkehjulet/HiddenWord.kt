@@ -13,8 +13,9 @@ object HiddenWord {
     private var word = hiddenWordsArray[(Random.nextInt(0, hiddenWordsArray.size - 1))]
     private var wordArray = word.toList() as ArrayList<Char>
     private var guessedMap = HashMap<Char, Boolean>()
-    private var rightGuesses = 0;
+    private var rightGuesses = 0
     private var letterIsRight : Boolean = false
+    private var wonScore : Int = 0
 
 
     init {
@@ -72,6 +73,18 @@ object HiddenWord {
 
     fun setLetterIsRight(value : Boolean){
         letterIsRight = value
+    }
+
+    fun getWord() : String {
+        return word
+    }
+
+    fun setWonScore(score : Int){
+        wonScore = score
+    }
+
+    fun getWonScore(): Int {
+        return wonScore
     }
 
 

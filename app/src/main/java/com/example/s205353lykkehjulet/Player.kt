@@ -27,6 +27,7 @@ class Player {
     }
 
     fun getPoints(): Int {
+        HiddenWord.setWonScore(points)
         return points
     }
 

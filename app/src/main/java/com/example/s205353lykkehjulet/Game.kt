@@ -39,6 +39,16 @@ class Game {
                 Field.BANKRUPTCY -> {
                     player.setPoints(0)
                 }
+                Field.DOUBLE_VALUE -> {
+                    pointsToWin = value.getRandomValue() * 2
+                    setResult(pointsToWin.toString())
+                    isValue = true
+                }
+                Field.TRIPLE_VALUE -> {
+                    pointsToWin = value.getRandomValue() * 3
+                    setResult(pointsToWin.toString())
+                    isValue = true
+                }
             }
 
 

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.s205353lykkehjulet.databinding.FragmentWonGameBinding
 
@@ -25,6 +26,8 @@ class WonGameFragment : Fragment() {
 
         binding.tryAgainButton.setOnClickListener {
             findNavController().navigate(R.id.action_wonGameFragment_to_fragment_landing_page) }
+        binding.score.setText(binding.score.text.toString() + " " + HiddenWord.getWonScore())
+        binding.textView2.setText(binding.textView2.text.toString() + " " + HiddenWord.getWord())
 
         return binding.root
     }
