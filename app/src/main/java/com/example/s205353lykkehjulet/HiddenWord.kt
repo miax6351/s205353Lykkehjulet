@@ -6,7 +6,7 @@ import kotlin.collections.HashMap
 import kotlin.random.Random
 
 
-object HiddenWord {
+class HiddenWord {
 
     private var questionMarkArray: ArrayList<Char> = ArrayList()
     private var hiddenWordsArray = arrayOf("Cat","Dog","Rooster","Coca Cola")
@@ -16,6 +16,7 @@ object HiddenWord {
     private var rightGuesses = 0
     private var letterIsRight : Boolean = false
     private var wonScore : Int = 0
+    private var guessedLetters = ArrayList<String>()
 
 
     init {
@@ -38,7 +39,7 @@ object HiddenWord {
 
         for (i in 0..wordArray.size - 1) {
             if (guess.equals(wordArray[i].toString(),true)){
-                if (!guessedMap.getValue(wordArray[i])){
+                if (!guessedLetters.contains(guess)){
                     getQuestionMarkArray()[i] = wordArray[i]
                     letterIsRight = true
                     rightGuesses++
@@ -46,6 +47,7 @@ object HiddenWord {
                 }
             }
         }
+        guessedLetters.add(guess)
 
     }
 

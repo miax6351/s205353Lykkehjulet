@@ -26,8 +26,8 @@ class WonGameFragment : Fragment() {
 
         binding.tryAgainButton.setOnClickListener {
             findNavController().navigate(R.id.action_wonGameFragment_to_fragment_landing_page) }
-        binding.score.setText(binding.score.text.toString() + " " + HiddenWord.getWonScore())
-        binding.textView2.setText(binding.textView2.text.toString() + " " + HiddenWord.getWord())
+        binding.score.setText(binding.score.text.toString() + " " )
+        binding.textView2.setText(binding.textView2.text.toString() + " ")
 
         return binding.root
     }

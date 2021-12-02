@@ -1,6 +1,6 @@
 package com.example.s205353lykkehjulet
 
-class Player {
+class Player() {
 
     private var lives = 5
     private var loseStatus = false
@@ -27,7 +27,6 @@ class Player {
     }
 
     fun getPoints(): Int {
-        HiddenWord.setWonScore(points)
         return points
     }
 

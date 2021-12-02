@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
-    private var titles = HiddenWord.getQuestionMarkArray()
+    private var titles = Word.getQuestionMarkArray()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.ViewHolder {
          val v = LayoutInflater.from(parent.context).inflate(R.layout.card_layout,parent,false)

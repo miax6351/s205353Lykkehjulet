@@ -33,10 +33,12 @@ class GameFragment : Fragment() {
     private var player : Player? = null
     private var luckyWheel : ImageView? = null
     private var lives: TextView? = null
+    private lateinit var hiddenWord : HiddenWord
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         game.startGame()
+        hiddenWord = game.getHiddenWord()
     }
 
     override fun onCreateView(
@@ -77,16 +79,16 @@ class GameFragment : Fragment() {
         }
 
         binding.guessButton.setOnClickListener(){
-            HiddenWord.displayLetterIfTrue(binding.guessInputField.text.toString())
+            game.getHiddenWord().displayLetterIfTrue(binding.guessInputField.text.toString())
             binding.guessInputField.text.clear()
-            if (HiddenWord.ifLetterIsRight()){
+            if (hiddenWord.ifLetterIsRight()){
                 if (game.isGameWon()){
                     findNavController().navigate(R.id.action_heartFragment_to_wonGameFragment)
                 }
-                player!!.addPoints(HiddenWord.getRightGuesses() * game.getPointsToWin())
+                player!!.addPoints(hiddenWord.getRightGuesses() * game.getPointsToWin())
                 viewModel.setPointsValue(player!!.getPoints())
                 (adapter as RecyclerAdapter).notifyDataSetChanged()
-                HiddenWord.setLetterIsRight(false)
+                hiddenWord.setLetterIsRight(false)
 
             } else {
                 player!!.loseLife()

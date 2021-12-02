@@ -12,10 +12,13 @@ class Game {
     private var pointsToWin = 0
     private var isValue : Boolean = false
     private var gameWon = false
+    private lateinit var hiddenWord : HiddenWord
 
 
     fun startGame(){
-        HiddenWord.getQuestionMarkArray().clear()
+        hiddenWord = HiddenWord()
+        hiddenWord.getQuestionMarkArray().clear()
+        Word.setQuestionMarkArray(hiddenWord.getQuestionMarkArray())
     }
 
     fun spinTheWheel(){
@@ -55,15 +58,15 @@ class Game {
     }
 
     fun guessLetter(letter : String){
-        HiddenWord.displayLetterIfTrue(letter)
-        if (HiddenWord.ifLetterIsRight()){
-            player.addPoints(pointsToWin * HiddenWord.getRightGuesses())
+        hiddenWord.displayLetterIfTrue(letter)
+        if (hiddenWord.ifLetterIsRight()){
+            player.addPoints(pointsToWin * hiddenWord.getRightGuesses())
         }
     }
 
     fun isGameWon() : Boolean{
-        var hiddenword = HiddenWord.getHiddenWordArray()
-        var guessedword = HiddenWord.getQuestionMarkArray()
+        var hiddenword = hiddenWord.getHiddenWordArray()
+        var guessedword = hiddenWord.getQuestionMarkArray()
         var realGuessedWord = ArrayList<Char>()
 
         for (i in 0..guessedword.size - 1){
@@ -97,6 +100,10 @@ class Game {
 
     fun getIsValue(): Boolean {
         return isValue
+    }
+
+    fun getHiddenWord(): HiddenWord {
+        return hiddenWord
     }
 
 }
