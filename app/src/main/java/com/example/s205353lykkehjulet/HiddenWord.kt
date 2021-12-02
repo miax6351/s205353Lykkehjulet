@@ -9,18 +9,44 @@ import kotlin.random.Random
 class HiddenWord {
 
     private var questionMarkArray: ArrayList<Char> = ArrayList()
-    private var hiddenWordsArray = arrayOf("Cat","Dog","Rooster","Red Panda", "Beaver","Snow Leopard")
-    private var word = hiddenWordsArray[(Random.nextInt(0, hiddenWordsArray.size - 1))]
-    private var wordArray = word.toList() as ArrayList<Char>
+    private var hiddenWordsArray = ArrayList<String>()
+    private var word : String
+    private var wordArray : ArrayList<Char>
     private var guessedMap = HashMap<Char, Boolean>()
     private var rightGuesses = 0
     private var letterIsRight : Boolean = false
     private var wonScore : Int = 0
     private var guessedLetters = ArrayList<String>()
-
+    private var animalsArray = arrayOf("Cat","Dog","Rooster","Red Panda", "Beaver","Snow Leopard")
+    private var softDrinksArray = arrayOf("Coca Cola", "Sprite", "Seven Up", "Miranda", "Jolly Cola")
+    private var brandsArray = arrayOf("Louis Vuitton","Gucci","Balenciaga","Supreme", "Off-White")
 
     init {
+
+        if (ChosenTopics.getAnimals()){
+            for (i in 0..animalsArray.size - 1){
+                hiddenWordsArray.add(animalsArray.get(i))
+            }
+        }
+
+        if (ChosenTopics.getBrands()){
+            for (i in 0..brandsArray.size - 1){
+                hiddenWordsArray.add(brandsArray.get(i))
+            }
+        }
+
+        if (ChosenTopics.getSoftDrinks()){
+            for (i in 0..softDrinksArray.size - 1){
+                hiddenWordsArray.add(softDrinksArray.get(i))
+            }
+        }
+
+        word = hiddenWordsArray[(Random.nextInt(0, hiddenWordsArray.size - 1))]
+        wordArray = word.toList() as ArrayList<Char>
+
         setGuessedArray()
+
+        println(hiddenWordsArray.toString())
     }
 
     fun getHiddenWordArray(): ArrayList<Char> {

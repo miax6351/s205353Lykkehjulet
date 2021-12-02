@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import androidx.navigation.fragment.findNavController
 import com.example.s205353lykkehjulet.databinding.FragmentChooseTopicBinding
 
@@ -27,6 +28,17 @@ class ChooseTopicFragment : Fragment() {
         binding.start.setOnClickListener {
             findNavController().navigate(R.id.action_chooseTopicFRagment_to_gameFragment) }
 
+        binding.animals.setOnCheckedChangeListener({ button , isChecked ->
+            if (isChecked) ChosenTopics.setAnimals(true) else ChosenTopics.setAnimals(false)
+        })
+
+        binding.brands.setOnCheckedChangeListener({ button , isChecked ->
+            if (isChecked) ChosenTopics.setBrands(true) else ChosenTopics.setBrands(false)
+        })
+
+        binding.softDrinks.setOnCheckedChangeListener({ button , isChecked ->
+            if (isChecked) ChosenTopics.setSoftDrinks(true) else ChosenTopics.setSoftDrinks(false)
+        })
 
         return binding.root
     }

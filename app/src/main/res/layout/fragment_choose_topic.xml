@@ -21,7 +21,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        android:checked="true" />
 
     <Switch
         android:id="@+id/soft_drinks"
@@ -33,7 +34,8 @@
         app:layout_constraintBottom_toTopOf="@+id/brands"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/animals" />
+        app:layout_constraintTop_toBottomOf="@+id/animals"
+        android:checked="true" />
 
     <Switch
         android:id="@+id/brands"
@@ -45,7 +47,8 @@
         app:layout_constraintBottom_toTopOf="@+id/start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/soft_drinks" />
+        app:layout_constraintTop_toBottomOf="@+id/soft_drinks"
+        android:checked="true" />
 
     <TextView
         android:id="@+id/textView3"
