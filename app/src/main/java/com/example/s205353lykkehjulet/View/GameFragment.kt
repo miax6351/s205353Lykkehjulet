@@ -82,6 +82,7 @@ class GameFragment : Fragment() {
                 gameViewModel.setResultValue(game.getResult())
                 gameViewModel.setPointsValue(player!!.getPoints())
                 gameViewModel.setLivesValue(player!!.getLives())
+                (heartAdapter as HeartRecyclerAdapter).notifyDataSetChanged()
                 if (game.getIsValue()){
                     makeGuessView()
                 } else {
@@ -105,6 +106,7 @@ class GameFragment : Fragment() {
             } else {
                 player!!.loseLife()
                 gameViewModel.setLivesValue(player!!.getLives())
+                (heartAdapter as HeartRecyclerAdapter).notifyDataSetChanged()
                 if (player!!.getLives() == 0)
                     findNavController().navigate(R.id.action_gameFragment_to_lostFragment)
                 }

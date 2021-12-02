@@ -2,19 +2,16 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardHeartView"
-    android:layout_height="40dp"
-    android:layout_width="40dp"
-    android:layout_margin="10dp"
+    android:layout_height="20dp"
+    android:layout_width="20dp"
     app:cardBackgroundColor="@color/white"
-    app:cardElevation="5dp"
-    app:contentPadding="5dp"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/relativeLayout"
-        android:padding="5dp">
+        >
 
         <ImageView
             android:layout_width="wrap_content"
@@ -25,7 +22,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_margin="5dp"
-            android:src="@drawable/heart"
+            android:src="@drawable/redheart"
             android:adjustViewBounds="true">
 
         </ImageView>

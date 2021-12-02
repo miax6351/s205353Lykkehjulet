@@ -5,12 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s205353lykkehjulet.Model.Player
 import com.example.s205353lykkehjulet.R
+import com.example.s205353lykkehjulet.ViewModel.GameViewModel
 
 class HeartRecyclerAdapter(player : Player) : RecyclerView.Adapter<HeartRecyclerAdapter.ViewHolder>() {
+
 
     private var hearts = player.getLives()
 
