@@ -28,15 +28,15 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="168dp"
 
         android:layout_marginTop="62dp"
-        android:layout_marginEnd="168dp"
         android:layout_marginBottom="12dp"
         android:fontFamily="Roboto"
         android:text="Welcome to"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/textView10"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,15 +44,14 @@
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
         android:layout_marginTop="25dp"
-        android:layout_marginEnd="140dp"
         android:layout_marginBottom="63dp"
         android:fontFamily="roboto"
-        android:text="WHEEL OF FORTUNE"
+        android:text="@string/lucky_wheel_name"
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 

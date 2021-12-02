@@ -6,12 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.example.s205353lykkehjulet.databinding.FragmentLostGameBinding
+import com.example.s205353lykkehjulet.databinding.FragmentChooseTopicBinding
 
 
-class LostGameFragment : Fragment() {
+class ChooseTopicFragment : Fragment() {
 
-    private var _binding: FragmentLostGameBinding? = null
+    private var _binding: FragmentChooseTopicBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,10 +23,10 @@ class LostGameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentLostGameBinding.inflate(inflater, container, false)
+        _binding = FragmentChooseTopicBinding.inflate(inflater, container, false)
+        binding.start.setOnClickListener {
+            findNavController().navigate(R.id.action_chooseTopicFRagment_to_gameFragment) }
 
-        binding.tryAgainButton.setOnClickListener {
-            findNavController().navigate(R.id.action_fragment_landing_page_to_chooseTopicFRagment) }
 
         return binding.root
     }

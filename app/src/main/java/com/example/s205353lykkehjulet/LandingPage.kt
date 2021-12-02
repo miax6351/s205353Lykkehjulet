@@ -24,7 +24,7 @@ class LandingPage : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentLandingPageBinding.inflate(inflater, container, false)
         binding.button2.setOnClickListener {
-            findNavController().navigate(R.id.action_fragment_landing_page_to_heartFragment) }
+            findNavController().navigate(R.id.action_fragment_landing_page_to_chooseTopicFRagment) }
         return binding.root
     }
 

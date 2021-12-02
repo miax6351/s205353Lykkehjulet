@@ -11,8 +11,8 @@
         android:label="fragment_landing_page"
         tools:layout="@layout/fragment_landing_page" >
         <action
-            android:id="@+id/action_fragment_landing_page_to_heartFragment"
-            app:destination="@id/gameFragment" />
+            android:id="@+id/action_fragment_landing_page_to_chooseTopicFRagment"
+            app:destination="@id/chooseTopicFRagment" />
     </fragment>
 
     <fragment
@@ -54,6 +54,17 @@
             app:destination="@id/fragment_landing_page" />
 
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/chooseTopicFRagment"
+        android:name="com.example.s205353lykkehjulet.ChooseTopicFragment"
+        android:label="fragmnet_choosee_topic"
+        tools:layout="@layout/fragment_choose_topic" >
+
+        <action
+            android:id="@+id/action_chooseTopicFRagment_to_gameFragment"
+            app:destination="@id/gameFragment" />
     </fragment>
 
 

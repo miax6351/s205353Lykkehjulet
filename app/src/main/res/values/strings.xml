@@ -7,6 +7,7 @@
     <string name="ya_guessed_the_word">ya guessed the word</string>
     <string name="play_again">Play again?</string>
     <string name="score">Score:</string>
+    <string name="lucky_wheel_name">Wheel of Fortune</string>
 
 
 </resources>

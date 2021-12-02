@@ -9,7 +9,7 @@ import kotlin.random.Random
 class HiddenWord {
 
     private var questionMarkArray: ArrayList<Char> = ArrayList()
-    private var hiddenWordsArray = arrayOf("Cat","Dog","Rooster","Coca Cola")
+    private var hiddenWordsArray = arrayOf("Cat","Dog","Rooster","Red Panda", "Beaver","Snow Leopard")
     private var word = hiddenWordsArray[(Random.nextInt(0, hiddenWordsArray.size - 1))]
     private var wordArray = word.toList() as ArrayList<Char>
     private var guessedMap = HashMap<Char, Boolean>()
