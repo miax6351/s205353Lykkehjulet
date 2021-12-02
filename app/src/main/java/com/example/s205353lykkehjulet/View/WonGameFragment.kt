@@ -1,4 +1,4 @@
-package com.example.s205353lykkehjulet
+package com.example.s205353lykkehjulet.View
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,12 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.example.s205353lykkehjulet.databinding.FragmentLostGameBinding
+import com.example.s205353lykkehjulet.R
+import com.example.s205353lykkehjulet.databinding.FragmentWonGameBinding
 
-
-class LostGameFragment : Fragment() {
-
-    private var _binding: FragmentLostGameBinding? = null
+class WonGameFragment : Fragment() {
+    private var _binding: FragmentWonGameBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,12 +22,13 @@ class LostGameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentLostGameBinding.inflate(inflater, container, false)
+        _binding = FragmentWonGameBinding.inflate(inflater, container, false)
 
         binding.tryAgainButton.setOnClickListener {
-            findNavController().navigate(R.id.action_fragment_landing_page_to_chooseTopicFRagment) }
+            findNavController().navigate(R.id.action_wonGameFragment_to_chooseTopicFRagment) }
+        binding.score.setText(binding.score.text.toString() + " " )
+        binding.textView2.setText(binding.textView2.text.toString() + " ")
 
         return binding.root
     }
-
 }

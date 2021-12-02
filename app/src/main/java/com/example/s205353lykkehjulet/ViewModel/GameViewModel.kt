@@ -1,4 +1,4 @@
-package com.example.s205353lykkehjulet
+package com.example.s205353lykkehjulet.ViewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

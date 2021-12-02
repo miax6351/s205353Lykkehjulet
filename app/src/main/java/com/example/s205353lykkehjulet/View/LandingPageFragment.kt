@@ -1,4 +1,4 @@
-package com.example.s205353lykkehjulet
+package com.example.s205353lykkehjulet.View
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,9 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.example.s205353lykkehjulet.R
 import com.example.s205353lykkehjulet.databinding.FragmentLandingPageBinding
 
-class LandingPage : Fragment() {
+class LandingPageFragment : Fragment() {
 
     private var _binding: FragmentLandingPageBinding? = null
     private val binding get() = _binding!!

@@ -1,4 +1,4 @@
-package com.example.s205353lykkehjulet
+package com.example.s205353lykkehjulet.Model
 
 object ChosenTopics {
 

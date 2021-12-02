@@ -1,4 +1,4 @@
-package com.example.s205353lykkehjulet
+package com.example.s205353lykkehjulet.Model
 
 
 import kotlin.collections.ArrayList
@@ -20,6 +20,7 @@ class HiddenWord {
     private var animalsArray = arrayOf("Cat","Dog","Rooster","Red Panda", "Beaver","Snow Leopard")
     private var softDrinksArray = arrayOf("Coca Cola", "Sprite", "Seven Up", "Miranda", "Jolly Cola")
     private var brandsArray = arrayOf("Louis Vuitton","Gucci","Balenciaga","Supreme", "Off-White")
+    private lateinit var topic : String
 
     init {
 
@@ -113,6 +114,18 @@ class HiddenWord {
 
     fun getWonScore(): Int {
         return wonScore
+    }
+
+    fun getTopic() : String {
+
+    if (animalsArray.contains(word)){
+        topic = "Animal"
+    } else if (brandsArray.contains(word)){
+        topic = "Brand"
+    } else if (softDrinksArray.contains(word)){
+        topic = "Soft Drink"
+    }
+        return topic
     }
 
 

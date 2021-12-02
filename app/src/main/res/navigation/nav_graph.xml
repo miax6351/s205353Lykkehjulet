@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_landing_page"
-        android:name="com.example.s205353lykkehjulet.LandingPage"
+        android:name="com.example.s205353lykkehjulet.View.LandingPageFragment"
         android:label="fragment_landing_page"
         tools:layout="@layout/fragment_landing_page" >
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/gameFragment"
-        android:name="com.example.s205353lykkehjulet.GameFragment"
+        android:name="com.example.s205353lykkehjulet.View.GameFragment"
         android:label="fragment_email_login_view"
         tools:layout="@layout/fragment_game" >
         <action
@@ -30,35 +30,27 @@
 
     <fragment
         android:id="@+id/lostGameFragment"
-        android:name="com.example.s205353lykkehjulet.LostGameFragment"
+        android:name="com.example.s205353lykkehjulet.View.LostGameFragment"
         android:label="fragment_lost_game"
         tools:layout="@layout/fragment_lost_game" >
         <action
-            android:id="@+id/action_lostGameFragment_to_fragment_landing_page"
-            app:destination="@id/fragment_landing_page" />
-        <action
-            android:id="@+id/action_lostGameFragment_to_heartFragment"
-            app:destination="@id/gameFragment" />
+            android:id="@+id/action_lostGameFragment_to_chooseTopicFRagment"
+            app:destination="@id/chooseTopicFRagment" />
     </fragment>
 
     <fragment
         android:id="@+id/wonGameFragment"
-        android:name="com.example.s205353lykkehjulet.WonGameFragment"
+        android:name="com.example.s205353lykkehjulet.View.WonGameFragment"
         android:label="fragmnet_won_game"
         tools:layout="@layout/fragment_won_game" >
         <action
-            android:id="@+id/action_heartFragment_to_wonGameFragment"
-            app:destination="@id/gameFragment" />
-        <action
-            android:id="@+id/action_wonGameFragment_to_fragment_landing_page"
-            app:destination="@id/fragment_landing_page" />
-
-
+            android:id="@+id/action_wonGameFragment_to_chooseTopicFRagment"
+            app:destination="@id/chooseTopicFRagment" />
     </fragment>
 
     <fragment
         android:id="@+id/chooseTopicFRagment"
-        android:name="com.example.s205353lykkehjulet.ChooseTopicFragment"
+        android:name="com.example.s205353lykkehjulet.View.ChooseTopicFragment"
         android:label="fragmnet_choosee_topic"
         tools:layout="@layout/fragment_choose_topic" >
 

@@ -1,12 +1,13 @@
-package com.example.s205353lykkehjulet
+package com.example.s205353lykkehjulet.View
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import androidx.navigation.fragment.findNavController
+import com.example.s205353lykkehjulet.Model.ChosenTopics
+import com.example.s205353lykkehjulet.R
 import com.example.s205353lykkehjulet.databinding.FragmentChooseTopicBinding
 
 

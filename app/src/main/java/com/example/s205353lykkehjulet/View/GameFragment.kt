@@ -1,6 +1,5 @@
-package com.example.s205353lykkehjulet
+package com.example.s205353lykkehjulet.View
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
@@ -11,13 +10,17 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.*
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s205353lykkehjulet.databinding.FragmentGameBinding
 import android.view.inputmethod.InputMethodManager
-import com.example.s205353lykkehjulet.databinding.FragmentWonGameBinding
+import com.example.s205353lykkehjulet.Model.Game
+import com.example.s205353lykkehjulet.Model.HiddenWord
+import com.example.s205353lykkehjulet.Model.Player
+import com.example.s205353lykkehjulet.R
+import com.example.s205353lykkehjulet.ViewModel.GameViewModel
+import com.example.s205353lykkehjulet.ViewModel.TopicsViewModel
 
 
 class GameFragment : Fragment() {
@@ -29,7 +32,9 @@ class GameFragment : Fragment() {
     private var game = Game()
     private var result: TextView? = null
     private var points: TextView? = null
-    private val viewModel : GameViewModel by viewModels()
+    private var topic: TextView? = null
+    private val gameViewModel : GameViewModel by viewModels()
+    private val topicsViewModel : TopicsViewModel by viewModels()
     private var player : Player? = null
     private var luckyWheel : ImageView? = null
     private var lives: TextView? = null
@@ -39,6 +44,7 @@ class GameFragment : Fragment() {
         super.onCreate(savedInstanceState)
         game.startGame()
         hiddenWord = game.getHiddenWord()
+        topicsViewModel.setTopic(hiddenWord.getTopic())
     }
 
     override fun onCreateView(
@@ -52,7 +58,7 @@ class GameFragment : Fragment() {
         _cardBinding = RecyclerAdapter(game)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
-
+        topic = binding.topicTextview
         result = binding.resultView
         points = binding.points
         player = game.getPlayer()
@@ -65,11 +71,11 @@ class GameFragment : Fragment() {
         binding.spinWheelButton.setOnClickListener(){
             game.spinTheWheel()
             spinningAnimation()
-            viewModel.setResultValue("")
+            gameViewModel.setResultValue("")
             Handler().postDelayed({
-                viewModel.setResultValue(game.getResult())
-                viewModel.setPointsValue(player!!.getPoints())
-                viewModel.setLivesValue(player!!.getLives())
+                gameViewModel.setResultValue(game.getResult())
+                gameViewModel.setPointsValue(player!!.getPoints())
+                gameViewModel.setLivesValue(player!!.getLives())
                 if (game.getIsValue()){
                     makeGuessView()
                 } else {
@@ -86,13 +92,13 @@ class GameFragment : Fragment() {
                     findNavController().navigate(R.id.action_heartFragment_to_wonGameFragment)
                 }
                 player!!.addPoints(hiddenWord.getRightGuesses() * game.getPointsToWin())
-                viewModel.setPointsValue(player!!.getPoints())
+                gameViewModel.setPointsValue(player!!.getPoints())
                 (adapter as RecyclerAdapter).notifyDataSetChanged()
                 hiddenWord.setLetterIsRight(false)
 
             } else {
                 player!!.loseLife()
-                viewModel.setLivesValue(player!!.getLives())
+                gameViewModel.setLivesValue(player!!.getLives())
                 if (player!!.getLives() == 0)
                     findNavController().navigate(R.id.action_gameFragment_to_lostFragment)
                 }
@@ -109,16 +115,20 @@ class GameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
-        viewModel.currentResult.observe(viewLifecycleOwner, {
+        gameViewModel.currentResult.observe(viewLifecycleOwner, {
                 newWord -> binding.resultView.text = newWord
         })
 
-        viewModel.currentPoints.observe(viewLifecycleOwner, {
+        gameViewModel.currentPoints.observe(viewLifecycleOwner, {
                 newPoints -> binding.points.text = newPoints.toString()
         })
 
-        viewModel.currentLives.observe(viewLifecycleOwner, {
+        gameViewModel.currentLives.observe(viewLifecycleOwner, {
                 newLives -> binding.lifeCount.text = newLives.toString()
+        })
+
+        topicsViewModel.currentTopic.observe(viewLifecycleOwner, {
+                newTopic -> binding.topicTextview.text = hiddenWord.getTopic()
         })
 
 
@@ -126,7 +136,7 @@ class GameFragment : Fragment() {
 
     fun spinningAnimation(){
         val angle = Math.random() * 360
-        val animRotateClick = AnimationUtils.loadAnimation(context,R.anim.rotation)
+        val animRotateClick = AnimationUtils.loadAnimation(context, R.anim.rotation)
         luckyWheel!!.startAnimation(animRotateClick)
         luckyWheel!!.setRotation(angle.toFloat())
     }
