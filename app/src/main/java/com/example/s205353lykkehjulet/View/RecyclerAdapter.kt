@@ -9,6 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.s205353lykkehjulet.Model.Game
 import com.example.s205353lykkehjulet.R
 
+/**
+ * Code implemented based  inspiration from the following video:
+ * https://www.youtube.com/watch?v=UCddGYMQJCo
+ */
+
 class RecyclerAdapter(game : Game) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
 

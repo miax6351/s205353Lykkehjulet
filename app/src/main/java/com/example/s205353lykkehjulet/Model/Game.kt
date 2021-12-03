@@ -16,6 +16,9 @@ class Game {
         hiddenWord.getQuestionMarkArray().clear()
     }
 
+    /**
+     * This method defines the outcome of the differens spin fields
+     */
     fun spinTheWheel(){
             isValue = false
             val spin = (Math.random() * Field.values().size).toInt()
@@ -59,6 +62,10 @@ class Game {
         }
     }
 
+    /**
+     * This method checks if the game is won based on, whether the guessed word (by the user)
+     * is the same word, as the one that was hidden in the beginning of the game
+     */
     fun isGameWon() : Boolean{
         var hiddenword = hiddenWord.getHiddenWordArray()
         var guessedword = hiddenWord.getQuestionMarkArray()

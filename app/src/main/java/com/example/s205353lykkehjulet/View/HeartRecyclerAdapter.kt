@@ -12,6 +12,10 @@ import com.example.s205353lykkehjulet.Model.Player
 import com.example.s205353lykkehjulet.R
 import com.example.s205353lykkehjulet.ViewModel.GameViewModel
 
+/**
+ * Code implemented based  inspiration from the following video:
+ * https://www.youtube.com/watch?v=UCddGYMQJCo
+ */
 class HeartRecyclerAdapter(player : Player) : RecyclerView.Adapter<HeartRecyclerAdapter.ViewHolder>() {
 
 
@@ -37,7 +41,7 @@ class HeartRecyclerAdapter(player : Player) : RecyclerView.Adapter<HeartRecycler
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //holder.itemLetter.text = titles[position].toString()
+
     }
 
     fun updateHearts(newHeart : Int) {
