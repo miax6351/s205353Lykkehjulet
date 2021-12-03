@@ -40,5 +40,9 @@ class HeartRecyclerAdapter(player : Player) : RecyclerView.Adapter<HeartRecycler
         //holder.itemLetter.text = titles[position].toString()
     }
 
+    fun updateHearts(newHeart : Int) {
+        hearts = newHeart
+    }
+
 
 }

@@ -32,7 +32,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.578"></androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintVertical_bias="0.756"></androidx.recyclerview.widget.RecyclerView>
 
     <TextView
         android:id="@+id/life_count"
@@ -92,8 +92,8 @@
         android:id="@+id/guess_input_field"
         android:layout_width="30dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
         android:inputType="text"
         android:maxLength="1"
         android:textSize="30sp"
@@ -101,7 +101,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/luckyWheel">
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView">
 
     </EditText>
 
@@ -109,13 +109,12 @@
         android:id="@+id/guess_button"
         android:layout_width="104dp"
         android:layout_height="45dp"
-        android:layout_marginStart="161dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="162dp"
-        android:layout_marginBottom="116dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="80dp"
         android:text="GUESS"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guess_input_field">
         app:layout_constraintVertical_bias="0.285"></Button>
@@ -124,7 +123,7 @@
         android:id="@+id/luckyWheel"
         android:layout_width="132dp"
         android:layout_height="130dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="40dp"
         android:src="@drawable/luckywheel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -136,12 +135,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="84dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="25dp"
         android:text="Topic:"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/points"
+        app:layout_constraintStart_toEndOf="@+id/heartRecyclerView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />

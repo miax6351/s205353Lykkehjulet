@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s205353lykkehjulet.databinding.FragmentGameBinding
 import android.view.inputmethod.InputMethodManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.s205353lykkehjulet.Model.Game
 import com.example.s205353lykkehjulet.Model.HiddenWord
 import com.example.s205353lykkehjulet.Model.Player
@@ -56,7 +57,7 @@ class GameFragment : Fragment() {
     ): View {
         _binding = FragmentGameBinding.inflate(inflater, container, false)
         val view = binding.root
-        layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        layoutManager = GridLayoutManager(context, 6)
         layoutManagerHearts = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         adapter = RecyclerAdapter(game)
         heartAdapter = HeartRecyclerAdapter(player)
@@ -83,6 +84,7 @@ class GameFragment : Fragment() {
                 gameViewModel.setPointsValue(player!!.getPoints())
                 gameViewModel.setLivesValue(player!!.getLives())
                 (heartAdapter as HeartRecyclerAdapter).notifyDataSetChanged()
+                (heartAdapter as HeartRecyclerAdapter).updateHearts(player!!.getLives())
                 if (game.getIsValue()){
                     makeGuessView()
                 } else {
@@ -105,15 +107,17 @@ class GameFragment : Fragment() {
 
             } else {
                 player!!.loseLife()
+
                 gameViewModel.setLivesValue(player!!.getLives())
                 (heartAdapter as HeartRecyclerAdapter).notifyDataSetChanged()
+                (heartAdapter as HeartRecyclerAdapter).updateHearts(player!!.getLives())
                 if (player!!.getLives() == 0)
                     findNavController().navigate(R.id.action_gameFragment_to_lostFragment)
-                }
+            }
 
             afterGuessingView()
 
-            }
+        }
 
         return view
     }
@@ -173,15 +177,6 @@ class GameFragment : Fragment() {
         binding.guessInputField.setVisibility(View.GONE)
         binding.guessButton.setVisibility(View.GONE)
     }
-
-    override fun onDestroy(){
-        super.onDestroy()
-    }
-
-
-
-
-
 }
 
 
