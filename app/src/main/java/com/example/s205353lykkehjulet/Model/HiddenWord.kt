@@ -17,7 +17,7 @@ class HiddenWord {
     private var letterIsRight : Boolean = false
     private var wonScore : Int = 0
     private var guessedLetters = ArrayList<String>()
-    private var animalsArray = arrayOf("Cat","Dog","Rooster","Red Panda", "Beaver","Snow Leopard", "Anteater")
+    private var animalsArray = arrayOf("Rooster","Red Panda", "Beaver","Snow Leopard", "Anteater")
     private var softDrinksArray = arrayOf("Coca Cola", "Sprite", "Seven Up", "Miranda", "Jolly Cola")
     private var brandsArray = arrayOf("Louis Vuitton","Gucci","Balenciaga","Supreme", "Off-White")
     private lateinit var topic : String

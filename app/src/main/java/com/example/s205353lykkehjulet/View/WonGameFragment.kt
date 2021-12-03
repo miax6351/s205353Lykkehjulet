@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.example.s205353lykkehjulet.Model.HiddenWord
 import com.example.s205353lykkehjulet.R
+import com.example.s205353lykkehjulet.ViewModel.GameViewModel
 import com.example.s205353lykkehjulet.databinding.FragmentWonGameBinding
 
-class WonGameFragment : Fragment() {
+class WonGameFragment(hiddenWord: HiddenWord) : Fragment() {
     private var _binding: FragmentWonGameBinding? = null
     private val binding get() = _binding!!
 
@@ -26,8 +28,7 @@ class WonGameFragment : Fragment() {
 
         binding.tryAgainButton.setOnClickListener {
             findNavController().navigate(R.id.action_wonGameFragment_to_chooseTopicFRagment) }
-        binding.score.setText(binding.score.text.toString() + " " )
-        binding.textView2.setText(binding.textView2.text.toString() + " ")
+        binding.textView2.setText(binding.textView2.text.toString())
 
         return binding.root
     }

@@ -39,7 +39,6 @@ class GameFragment : Fragment() {
     private val topicsViewModel : TopicsViewModel by viewModels()
     private var player = game.getPlayer()
     private var luckyWheel : ImageView? = null
-    private var lives: TextView? = null
     private var layoutManagerHearts: RecyclerView.LayoutManager? = null
     private lateinit var hiddenWord : HiddenWord
 
@@ -70,7 +69,6 @@ class GameFragment : Fragment() {
         result = binding.resultView
         points = binding.points
         luckyWheel = binding.luckyWheel
-        lives = binding.lifeCount
 
         binding.guessInputField.setVisibility(View.GONE)
         binding.guessButton.setVisibility(View.GONE)
@@ -135,9 +133,6 @@ class GameFragment : Fragment() {
                 newPoints -> binding.points.text = newPoints.toString()
         })
 
-        gameViewModel.currentLives.observe(viewLifecycleOwner, {
-                newLives -> binding.lifeCount.text = newLives.toString()
-        })
 
         topicsViewModel.currentTopic.observe(viewLifecycleOwner, {
                 newTopic -> binding.topicTextview.text = hiddenWord.getTopic()
