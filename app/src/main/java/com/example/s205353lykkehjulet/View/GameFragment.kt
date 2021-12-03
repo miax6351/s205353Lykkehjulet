@@ -29,18 +29,18 @@ class GameFragment : Fragment() {
     private val binding get() = _binding!!
     private var _cardBinding: RecyclerAdapter? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
-    private var adapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>? = null
-    private var heartAdapter : RecyclerView.Adapter<HeartRecyclerAdapter.ViewHolder>? = null
+    private var adapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>? = null
+    private var heartAdapter: RecyclerView.Adapter<HeartRecyclerAdapter.ViewHolder>? = null
     private var game = Game()
     private var result: TextView? = null
     private var points: TextView? = null
     private var topic: TextView? = null
-    private val gameViewModel : GameViewModel by viewModels()
-    private val topicsViewModel : TopicsViewModel by viewModels()
+    private val gameViewModel: GameViewModel by viewModels()
+    private val topicsViewModel: TopicsViewModel by viewModels()
     private var player = game.getPlayer()
-    private var luckyWheel : ImageView? = null
+    private var luckyWheel: ImageView? = null
     private var layoutManagerHearts: RecyclerView.LayoutManager? = null
-    private lateinit var hiddenWord : HiddenWord
+    private lateinit var hiddenWord: HiddenWord
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +56,10 @@ class GameFragment : Fragment() {
     ): View {
         _binding = FragmentGameBinding.inflate(inflater, container, false)
         val view = binding.root
+        //here the layoutmanagers for the recyclerviews are defined
+        //Since the hidden word recyclerview can be in multiple layers, we use grid layout
         layoutManager = GridLayoutManager(context, 6)
+        // heart recyclerview is only in one layer, thus defined as horizontal
         layoutManagerHearts = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         adapter = RecyclerAdapter(game)
         heartAdapter = HeartRecyclerAdapter(player)
@@ -73,47 +76,12 @@ class GameFragment : Fragment() {
         binding.guessInputField.setVisibility(View.GONE)
         binding.guessButton.setVisibility(View.GONE)
 
-        binding.spinWheelButton.setOnClickListener(){
-            game.spinTheWheel()
-            spinningAnimation()
-            gameViewModel.setResultValue("")
-            Handler().postDelayed({
-                gameViewModel.setResultValue(game.getResult())
-                gameViewModel.setPointsValue(player!!.getPoints())
-                gameViewModel.setLivesValue(player!!.getLives())
-                (heartAdapter as HeartRecyclerAdapter).notifyDataSetChanged()
-                (heartAdapter as HeartRecyclerAdapter).updateHearts(player!!.getLives())
-                if (game.getIsValue()){
-                    makeGuessView()
-                } else {
-                    otherFieldView()
-                }
-            }, 1010)
+        binding.spinWheelButton.setOnClickListener() {
+            spinButtonPressed()
         }
 
-        binding.guessButton.setOnClickListener(){
-            game.getHiddenWord().displayLetterIfTrue(binding.guessInputField.text.toString())
-            binding.guessInputField.text.clear()
-            if (hiddenWord.ifLetterIsRight()){
-                if (game.isGameWon()){
-                    findNavController().navigate(R.id.action_heartFragment_to_wonGameFragment)
-                }
-                player!!.addPoints(hiddenWord.getRightGuesses() * game.getPointsToWin())
-                gameViewModel.setPointsValue(player!!.getPoints())
-                (adapter as RecyclerAdapter).notifyDataSetChanged()
-                hiddenWord.setLetterIsRight(false)
-
-            } else {
-                player!!.loseLife()
-
-                gameViewModel.setLivesValue(player!!.getLives())
-                (heartAdapter as HeartRecyclerAdapter).notifyDataSetChanged()
-                (heartAdapter as HeartRecyclerAdapter).updateHearts(player!!.getLives())
-                if (player!!.getLives() == 0)
-                    findNavController().navigate(R.id.action_gameFragment_to_lostFragment)
-            }
-
-            afterGuessingView()
+        binding.guessButton.setOnClickListener() {
+            guessButtonPressed()
 
         }
 
@@ -125,23 +93,26 @@ class GameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
-        gameViewModel.currentResult.observe(viewLifecycleOwner, {
-                newWord -> binding.resultView.text = newWord
+        gameViewModel.currentResult.observe(viewLifecycleOwner, { newWord ->
+            binding.resultView.text = newWord
         })
 
-        gameViewModel.currentPoints.observe(viewLifecycleOwner, {
-                newPoints -> binding.points.text = newPoints.toString()
+        gameViewModel.currentPoints.observe(viewLifecycleOwner, { newPoints ->
+            binding.points.text = newPoints.toString()
         })
 
 
-        topicsViewModel.currentTopic.observe(viewLifecycleOwner, {
-                newTopic -> binding.topicTextview.text = hiddenWord.getTopic()
+        topicsViewModel.currentTopic.observe(viewLifecycleOwner, { newTopic ->
+            binding.topicTextview.text = hiddenWord.getTopic()
         })
 
 
     }
 
-    fun spinningAnimation(){
+    /**
+     * This method implements the spinning animation of the wheel
+     */
+    fun spinningAnimation() {
         val angle = Math.random() * 360
         val animRotateClick = AnimationUtils.loadAnimation(context, R.anim.rotation)
         luckyWheel!!.startAnimation(animRotateClick)
@@ -153,13 +124,20 @@ class GameFragment : Fragment() {
         imm.hideSoftInputFromWindow(windowToken, 0)
     }
 
-    private fun makeGuessView(){
+    /**
+     * This method sets guess view and hides the spin view and
+     */
+    private fun makeGuessView() {
         binding.guessInputField.setVisibility(View.VISIBLE)
         binding.guessButton.setVisibility(View.VISIBLE)
         binding.spinWheelButton.setVisibility(View.GONE)
         binding.luckyWheel.setVisibility(View.GONE)
     }
-    private fun afterGuessingView(){
+
+    /**
+     * This method sets spin view
+     */
+    private fun afterGuessingView() {
         binding.spinWheelButton.setVisibility(View.VISIBLE)
         binding.luckyWheel.setVisibility(View.VISIBLE)
         binding.guessButton.setVisibility(View.GONE)
@@ -168,9 +146,64 @@ class GameFragment : Fragment() {
 
     }
 
-    private fun otherFieldView(){
+    /**
+     * This method sets the view if another field is spun
+     */
+    private fun otherFieldView() {
         binding.guessInputField.setVisibility(View.GONE)
         binding.guessButton.setVisibility(View.GONE)
+    }
+
+    /**
+     * This method implements the functionality of the spin button
+     */
+    private fun spinButtonPressed() {
+        game.spinTheWheel()
+        spinningAnimation()
+        gameViewModel.setResultValue("")
+        Handler().postDelayed({
+            gameViewModel.setResultValue(game.getResult())
+            gameViewModel.setPointsValue(player!!.getPoints())
+            gameViewModel.setLivesValue(player!!.getLives())
+            (heartAdapter as HeartRecyclerAdapter).notifyDataSetChanged()
+            (heartAdapter as HeartRecyclerAdapter).updateHearts(player!!.getLives())
+            if (player!!.getLives() == 0)
+                findNavController().navigate(R.id.action_gameFragment_to_lostFragment)
+            if (game.getIsValue()) {
+                makeGuessView()
+            } else {
+                otherFieldView()
+            }
+        }, 1010)
+    }
+
+    /**
+     * This method implements the functionality of the guess button
+     */
+    private fun guessButtonPressed() {
+        game.getHiddenWord().displayLetterIfTrue(binding.guessInputField.text.toString())
+        binding.guessInputField.text.clear()
+        // if the letter is right, we check whether the game has been won / word has been completely guessed
+        if (hiddenWord.ifLetterIsRight()) {
+            if (game.isGameWon()) {
+                findNavController().navigate(R.id.action_heartFragment_to_wonGameFragment)
+            }
+            player!!.addPoints(hiddenWord.getRightGuesses() * game.getPointsToWin())
+            gameViewModel.setPointsValue(player!!.getPoints())
+            (adapter as RecyclerAdapter).notifyDataSetChanged()
+            hiddenWord.setLetterIsRight(false)
+
+        } else {
+            player!!.loseLife()
+
+            gameViewModel.setLivesValue(player!!.getLives())
+            (heartAdapter as HeartRecyclerAdapter).notifyDataSetChanged()
+            (heartAdapter as HeartRecyclerAdapter).updateHearts(player!!.getLives())
+            if (player!!.getLives() == 0)
+                findNavController().navigate(R.id.action_gameFragment_to_lostFragment)
+        }
+
+        afterGuessingView()
     }
 }
 

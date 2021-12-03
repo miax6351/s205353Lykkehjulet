@@ -8,6 +8,8 @@
     <string name="play_again">Play again?</string>
     <string name="score">Score:</string>
     <string name="lucky_wheel_name">Wheel of Fortune</string>
+    <string name="welcome_to">Welcome to</string>
+    <string name="play">PLAY</string>
 
 
 </resources>

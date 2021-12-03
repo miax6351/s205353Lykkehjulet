@@ -17,31 +17,41 @@ class HiddenWord {
     private var letterIsRight : Boolean = false
     private var wonScore : Int = 0
     private var guessedLetters = ArrayList<String>()
-    private var animalsArray = arrayOf("Rooster","Red Panda", "Beaver","Snow Leopard", "Anteater")
-    private var softDrinksArray = arrayOf("Coca Cola", "Sprite", "Seven Up", "Miranda", "Jolly Cola")
-    private var brandsArray = arrayOf("Louis Vuitton","Gucci","Balenciaga","Supreme", "Off-White")
     private lateinit var topic : String
+    /**
+     * These arrays include the words that can be guessed
+     */
+    private var animalsArray = arrayOf("Rooster","Red Panda", "Beaver","Whale", "Anteater")
+    private var softDrinksArray = arrayOf("Coca Cola", "Sprite", "Seven Up", "Miranda", "Jolly Cola")
+    private var brandsArray = arrayOf("Gucci","Balenciaga","Supreme", "Off-White")
 
     init {
-
+        // here the hiddenWordsArray gets it's content
         if (ChosenTopics.getAnimals()){
             for (i in 0..animalsArray.size - 1){
                 hiddenWordsArray.add(animalsArray.get(i))
             }
         }
-
         if (ChosenTopics.getBrands()){
             for (i in 0..brandsArray.size - 1){
                 hiddenWordsArray.add(brandsArray.get(i))
             }
         }
-
         if (ChosenTopics.getSoftDrinks()){
             for (i in 0..softDrinksArray.size - 1){
                 hiddenWordsArray.add(softDrinksArray.get(i))
             }
         }
 
+        if (!ChosenTopics.getAnimals() && !ChosenTopics.getBrands() && !ChosenTopics.getSoftDrinks()){
+            if (ChosenTopics.getAnimals()){
+                for (i in 0..animalsArray.size - 1){
+                    hiddenWordsArray.add(animalsArray.get(i))
+                }
+            }
+        }
+
+        // Here the specific word of this game is assigned
         word = hiddenWordsArray[(Random.nextInt(0, hiddenWordsArray.size - 1))]
         wordArray = word.toList() as ArrayList<Char>
 
@@ -60,6 +70,11 @@ class HiddenWord {
         }
     }
 
+    /**
+     * This method looks the guessed string up in the wordArray, which contains the hidden word.
+     * If the guess equals one of the letters in wordArray, this means that the guess is right
+     * When a letter has been guessed, it is placed in an ArrayList of guessed letters (guessedLetters)
+     */
     fun displayLetterIfTrue(guess : String){
         rightGuesses = 0
         letterIsRight = false
@@ -78,6 +93,10 @@ class HiddenWord {
 
     }
 
+    /**
+     * This method checks returns the questionMarkArray
+     * If the array is empty, the questionMarkArray is assigned its '?'-values
+     */
     fun getQuestionMarkArray(): ArrayList<Char>{
 
         if (questionMarkArray.isEmpty()){

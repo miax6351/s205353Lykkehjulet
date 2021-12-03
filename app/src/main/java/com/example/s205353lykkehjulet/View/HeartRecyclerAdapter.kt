@@ -31,7 +31,6 @@ class HeartRecyclerAdapter(player : Player) : RecyclerView.Adapter<HeartRecycler
         return hearts
     }
 
-
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         var item : ImageView
 

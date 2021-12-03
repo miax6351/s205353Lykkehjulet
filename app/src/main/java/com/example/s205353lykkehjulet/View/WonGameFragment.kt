@@ -11,7 +11,7 @@ import com.example.s205353lykkehjulet.R
 import com.example.s205353lykkehjulet.ViewModel.GameViewModel
 import com.example.s205353lykkehjulet.databinding.FragmentWonGameBinding
 
-class WonGameFragment(hiddenWord: HiddenWord) : Fragment() {
+class WonGameFragment() : Fragment() {
     private var _binding: FragmentWonGameBinding? = null
     private val binding get() = _binding!!
 
