@@ -31,23 +31,24 @@ class GameFragment : Fragment() {
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>? = null
     private var heartAdapter: RecyclerView.Adapter<HeartRecyclerAdapter.ViewHolder>? = null
-    private var game = Game()
+    private var game : Game? = null
     private var result: TextView? = null
     private var points: TextView? = null
     private var topic: TextView? = null
     private val gameViewModel: GameViewModel by viewModels()
     private val topicsViewModel: TopicsViewModel by viewModels()
-    private var player = game.getPlayer()
+    private var player : Player? = null
     private var luckyWheel: ImageView? = null
     private var layoutManagerHearts: RecyclerView.LayoutManager? = null
     private lateinit var hiddenWord: HiddenWord
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        game.startGame()
-        hiddenWord = game.getHiddenWord()
+        game = Game()
+        game!!.startGame()
+        hiddenWord = game!!.getHiddenWord()
         topicsViewModel.setTopic(hiddenWord.getTopic())
-        player = game.getPlayer()
+        player = game!!.getPlayer()
     }
 
     override fun onCreateView(
@@ -61,9 +62,9 @@ class GameFragment : Fragment() {
         layoutManager = GridLayoutManager(context, 6)
         // heart recyclerview is only in one layer, thus defined as horizontal
         layoutManagerHearts = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        adapter = RecyclerAdapter(game)
-        heartAdapter = HeartRecyclerAdapter(player)
-        _cardBinding = RecyclerAdapter(game)
+        adapter = game?.let { RecyclerAdapter(it) }
+        heartAdapter = HeartRecyclerAdapter(player!!)
+        _cardBinding = game?.let { RecyclerAdapter(it) }
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
         binding.heartRecyclerView.layoutManager = layoutManagerHearts
@@ -158,18 +159,18 @@ class GameFragment : Fragment() {
      * This method implements the functionality of the spin button
      */
     private fun spinButtonPressed() {
-        game.spinTheWheel()
+        game!!.spinTheWheel()
         spinningAnimation()
         gameViewModel.setResultValue("")
         Handler().postDelayed({
-            gameViewModel.setResultValue(game.getResult())
+            gameViewModel.setResultValue(game!!.getResult())
             gameViewModel.setPointsValue(player!!.getPoints())
             gameViewModel.setLivesValue(player!!.getLives())
             (heartAdapter as HeartRecyclerAdapter).notifyDataSetChanged()
             (heartAdapter as HeartRecyclerAdapter).updateHearts(player!!.getLives())
             if (player!!.getLives() == 0)
                 findNavController().navigate(R.id.action_gameFragment_to_lostFragment)
-            if (game.getIsValue()) {
+            if (game!!.getIsValue()) {
                 makeGuessView()
             } else {
                 otherFieldView()
@@ -181,14 +182,14 @@ class GameFragment : Fragment() {
      * This method implements the functionality of the guess button
      */
     private fun guessButtonPressed() {
-        game.getHiddenWord().displayLetterIfTrue(binding.guessInputField.text.toString())
+        game!!.getHiddenWord().displayLetterIfTrue(binding.guessInputField.text.toString())
         binding.guessInputField.text.clear()
         // if the letter is right, we check whether the game has been won / word has been completely guessed
         if (hiddenWord.ifLetterIsRight()) {
-            if (game.isGameWon()) {
+            if (game!!.isGameWon()) {
                 findNavController().navigate(R.id.action_heartFragment_to_wonGameFragment)
             }
-            player!!.addPoints(hiddenWord.getRightGuesses() * game.getPointsToWin())
+            player!!.addPoints(hiddenWord.getRightGuesses() * game!!.getPointsToWin())
             gameViewModel.setPointsValue(player!!.getPoints())
             (adapter as RecyclerAdapter).notifyDataSetChanged()
             hiddenWord.setLetterIsRight(false)

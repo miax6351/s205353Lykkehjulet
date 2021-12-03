@@ -44,11 +44,9 @@ class HiddenWord {
         }
 
         if (!ChosenTopics.getAnimals() && !ChosenTopics.getBrands() && !ChosenTopics.getSoftDrinks()){
-            if (ChosenTopics.getAnimals()){
                 for (i in 0..animalsArray.size - 1){
                     hiddenWordsArray.add(animalsArray.get(i))
                 }
-            }
         }
 
         // Here the specific word of this game is assigned
@@ -57,7 +55,6 @@ class HiddenWord {
 
         setGuessedArray()
 
-        println(hiddenWordsArray.toString())
     }
 
     fun getHiddenWordArray(): ArrayList<Char> {
